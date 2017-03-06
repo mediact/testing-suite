@@ -1,0 +1,25 @@
+{
+  "name": "mediact/testing-suite",
+  "description": "Contains MediaCT's default testing packages.",
+  "type": "metapackage",
+  "license": "proprietary",
+  "prefer-stable": true,
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "MediaCT B.V.",
+      "email": "contact@mediact.nl"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://composer.mediact.nl"
+    }
+  ],
+  "require": {
+    "php": "^7.0",
+    "phpunit/phpunit": "^5.5",
+    "mediact/coding-standard": "^1.6"
+  }
+}
