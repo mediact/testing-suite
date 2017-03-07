@@ -21,10 +21,14 @@ test -d $VENDOR/mediact/coding-standard \
 		--no-interaction
 
 # Run static code analysis.
-- if [ -d src ]; then test -f phpcs.xml && $BIN/phpcs src; fi
-- if [ -d src ]; then test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml; fi
-- if [ -d src ]; then $BIN/phpstan analyse src --level 4 --no-progress; fi
+if [ -d src ]; then 
+  test -f phpcs.xml && $BIN/phpcs src
+  test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml
+  $BIN/phpstan analyse src --level 4 --no-progress 
+fi
 
-- if [ -d tests ]; then test -f phpcs.xml && $BIN/phpcs tests; fi
-- if [ -d tests ]; then test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml; fi
-- if [ -d tests ]; then $BIN/phpstan analyse tests --level 4 --no-progress; fi
+if [ -d tests ]; then 
+  test -f phpcs.xml && $BIN/phpcs tests
+  test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml
+  $BIN/phpstan analyse tests --level 4 --no-progress 
+fi

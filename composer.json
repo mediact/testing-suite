@@ -20,7 +20,8 @@
   "require": {
     "php": "^7.0",
     "phpunit/phpunit": "^5.5",
-    "mediact/coding-standard": "^1.6"
+    "mediact/coding-standard": "^1.6",
+    "phpstan/phpstan": "^0.6"
   },
   "bin": ["bin/run.sh"]
 }
