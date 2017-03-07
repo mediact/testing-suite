@@ -1,7 +1,7 @@
 {
   "name": "mediact/testing-suite",
   "description": "Contains MediaCT's default testing packages.",
-  "type": "metapackage",
+  "type": "project",
   "license": "proprietary",
   "prefer-stable": true,
   "minimum-stability": "stable",
@@ -22,6 +22,12 @@
     "phpunit/phpunit": "^5.5",
     "mediact/coding-standard": "^1.6",
     "phpstan/phpstan": "^0.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mediact\\TestingSuite\\": "src/",
+      "Mediact\\TestingSuite\\Tests\\": "tests/"
+    }
   },
   "bin": ["bin/run.sh"]
 }
