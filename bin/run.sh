@@ -1,4 +1,6 @@
 # Run unit tests.
+echo "Running pwd for testing"
+pwd
 
 test ! -f phpunit.xml \
 || test ! -x $BIN/phpunit \
