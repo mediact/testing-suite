@@ -5,13 +5,8 @@ packages. By requiring these packages here, they're maintainable from a single
 location. Maintaining them seperately for each project is very inefficient and 
 leads to mistakes.  
 
-The "run.sh" file contains a series of commands that will need to be run by every pipeline.
+The "mediact-testing-suite" file contains a series of commands that will need to be run by every pipeline.
 This includes PHPMD PHPCS and PHPUnit.
 
-## Packages included
-* phpunit/phpunit
-* mediact/coding-standard
-
-
-
-
+This package can be run locally or it might be run in a CI setting.
+An example file for running the testing suite in BitBucket Pipelines can be found in this directory. It is called bitbucket-pipelines.yml.dist
