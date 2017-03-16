@@ -8,20 +8,20 @@ cat $SCRIPTDIR/phpunitheader.txt
 test ! -f phpunit.xml \
 || test ! -x $BIN/phpunit \
 || $BIN/phpunit \
-		--fail-on-warning \
-		--disallow-test-output \
-		--report-useless-tests
+  --fail-on-warning \
+  --disallow-test-output \
+  --report-useless-tests
 
 # Require the coding standards, if they are not explicitly defined.
 test -d $VENDOR/mediact/coding-standard \
 || composer require mediact/coding-standard \
-		--dev \
-		--prefer-dist \
-		--no-scripts \
-		--ignore-platform-reqs \
-		--no-progress \
-		--optimize-autoloader \
-		--no-interaction
+  --dev \
+  --prefer-dist \
+  --no-scripts \
+  --ignore-platform-reqs \
+  --no-progress \
+  --optimize-autoloader \
+  --no-interaction
 
 # Run static code analysis.
 if [ -d src ]; then 
