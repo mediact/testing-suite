@@ -30,8 +30,5 @@
       "Mediact\\TestingSuite\\Tests\\": "tests/"
     }
   },
-  "bin": ["bin/mediact-testing-suite"],
-  "require-dev": {
-    "mediact/testing-suite": "dev-feature/AUTOMATION-25"
-  }
+  "bin": ["bin/mediact-testing-suite"]
 }
