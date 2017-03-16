@@ -19,7 +19,6 @@
   ],
   "require": {
     "php": "^7.0",
-    "phpunit/phpunit": "^5.5",
     "mediact/coding-standard": "^1.6",
     "mediact/coding-standard-phpstorm": "^1.0",
     "phpstan/phpstan": "^0.6.4"
