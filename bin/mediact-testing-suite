@@ -1,9 +1,10 @@
 #!/bin/bash
-# Run unit tests.
-echo "Running pwd for testing"
-pwd
+SCRIPTDIR="$(dirname "${BASH_SOURCE[0]}")"
+VENDOR=$(composer config vendor-dir)
+BIN=$(composer config bin-dir)
 
-cat phpunitheader.txt
+# Run unit tests.
+cat $SCRIPTDIR/phpunitheader.txt
 test ! -f phpunit.xml \
 || test ! -x $BIN/phpunit \
 || $BIN/phpunit \
@@ -24,19 +25,19 @@ test -d $VENDOR/mediact/coding-standard \
 
 # Run static code analysis.
 if [ -d src ]; then 
-  cat phpcsheader.txt
+  cat $SCRIPTDIR/phpcsheader.txt
   test -f phpcs.xml && $BIN/phpcs src
-  cat phpmdheader.txt
+  cat $SCRIPTDIR/phpmdheader.txt
   test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml
-  cat phpstanheader.txt
+  cat $SCRIPTDIR/phpstanheader.txt
   $BIN/phpstan analyse src --level 4 --no-progress 
 fi
 
 if [ -d tests ]; then 
-  cat phpcsheader.txt
+  cat $SCRIPTDIR/phpcsheader.txt
   test -f phpcs.xml && $BIN/phpcs tests
-  cat phpmdheader.txt
+  cat $SCRIPTDIR/phpmdheader.txt
   test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml
-  cat phpstanheader.txt
+  cat $SCRIPTDIR/phpstanheader.txt
   $BIN/phpstan analyse tests --level 4 --no-progress 
 fi
