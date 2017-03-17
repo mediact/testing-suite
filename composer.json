@@ -23,11 +23,5 @@
     "mediact/coding-standard-phpstorm": "^1.0",
     "phpstan/phpstan": "^0.6.4"
   },
-  "autoload": {
-    "psr-4": {
-      "Mediact\\TestingSuite\\": "src/",
-      "Mediact\\TestingSuite\\Tests\\": "tests/"
-    }
-  },
   "bin": ["bin/mediact-testing-suite"]
 }
