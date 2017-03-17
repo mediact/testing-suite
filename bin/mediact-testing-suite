@@ -1,5 +1,5 @@
 #!/bin/bash
-SCRIPTDIR="$(dirname "${BASH_SOURCE[0]}")"
+SCRIPTDIR="vendor/mediact/testing-suite/bin/"
 VENDOR=$(composer config vendor-dir)
 BIN=$(composer config bin-dir)
 
