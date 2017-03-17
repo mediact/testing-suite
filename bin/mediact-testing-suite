@@ -1,0 +1,43 @@
+#!/bin/bash
+SCRIPTDIR="vendor/mediact/testing-suite/bin/"
+VENDOR=$(composer config vendor-dir)
+BIN=$(composer config bin-dir)
+
+# Run unit tests.
+cat $SCRIPTDIR/phpunitheader.txt
+test ! -f phpunit.xml \
+|| test ! -x $BIN/phpunit \
+|| $BIN/phpunit \
+  --fail-on-warning \
+  --disallow-test-output \
+  --report-useless-tests
+
+# Require the coding standards, if they are not explicitly defined.
+test -d $VENDOR/mediact/coding-standard \
+|| composer require mediact/coding-standard \
+  --dev \
+  --prefer-dist \
+  --no-scripts \
+  --ignore-platform-reqs \
+  --no-progress \
+  --optimize-autoloader \
+  --no-interaction
+
+# Run static code analysis.
+if [ -d src ]; then 
+  cat $SCRIPTDIR/phpcsheader.txt
+  test -f phpcs.xml && $BIN/phpcs src
+  cat $SCRIPTDIR/phpmdheader.txt
+  test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml
+  cat $SCRIPTDIR/phpstanheader.txt
+  $BIN/phpstan analyse src --level 4 --no-progress 
+fi
+
+if [ -d tests ]; then 
+  cat $SCRIPTDIR/phpcsheader.txt
+  test -f phpcs.xml && $BIN/phpcs tests
+  cat $SCRIPTDIR/phpmdheader.txt
+  test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml
+  cat $SCRIPTDIR/phpstanheader.txt
+  $BIN/phpstan analyse tests --level 4 --no-progress 
+fi
