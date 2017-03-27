@@ -10,7 +10,7 @@ test ! -f phpunit.xml \
 || $BIN/phpunit \
   --fail-on-warning \
   --disallow-test-output \
-  --report-useless-tests
+  --report-useless-tests || exit $?
 
 # Require the coding standards, if they are not explicitly defined.
 test -d $VENDOR/mediact/coding-standard \
@@ -21,23 +21,23 @@ test -d $VENDOR/mediact/coding-standard \
   --ignore-platform-reqs \
   --no-progress \
   --optimize-autoloader \
-  --no-interaction
+  --no-interaction || exit $?
 
 # Run static code analysis.
-if [ -d src ]; then 
+if [ -d src ]; then
   cat $SCRIPTDIR/phpcsheader.txt
-  test -f phpcs.xml && $BIN/phpcs src
+  test -f phpcs.xml && $BIN/phpcs src || exit $?
   cat $SCRIPTDIR/phpmdheader.txt
-  test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml
+  test -f phpmd.xml && $BIN/phpmd src xml phpmd.xml || exit $?
   cat $SCRIPTDIR/phpstanheader.txt
-  $BIN/phpstan analyse src --level 4 --no-progress 
+  $BIN/phpstan analyse src --level 4 --no-progress || exit $?
 fi
 
-if [ -d tests ]; then 
+if [ -d tests ]; then
   cat $SCRIPTDIR/phpcsheader.txt
-  test -f phpcs.xml && $BIN/phpcs tests
+  test -f phpcs.xml && $BIN/phpcs tests || exit $?
   cat $SCRIPTDIR/phpmdheader.txt
-  test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml
+  test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml || exit $?
   cat $SCRIPTDIR/phpstanheader.txt
-  $BIN/phpstan analyse tests --level 4 --no-progress 
+  $BIN/phpstan analyse tests --level 4 --no-progress || exit $?
 fi
