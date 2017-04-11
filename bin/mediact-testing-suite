@@ -38,5 +38,5 @@ if [ -d tests ]; then
   cat $SCRIPTDIR/phpmdheader.txt
   test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml || exit $?
   cat $SCRIPTDIR/phpstanheader.txt
-  $BIN/phpstan analyse tests --level 4 --no-progress || exit $?
+  $BIN/phpstan analyse tests --level 2 --no-progress || exit $?
 fi
