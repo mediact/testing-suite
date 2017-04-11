@@ -9,8 +9,7 @@ test ! -f phpunit.xml \
 || test ! -x $BIN/phpunit \
 || $BIN/phpunit \
   --fail-on-warning \
-  --disallow-test-output \
-  --report-useless-tests || exit $?
+  --disallow-test-output || exit $?
 
 # Require the coding standards, if they are not explicitly defined.
 test -d $VENDOR/mediact/coding-standard \
@@ -39,5 +38,5 @@ if [ -d tests ]; then
   cat $SCRIPTDIR/phpmdheader.txt
   test -f phpmd.xml && $BIN/phpmd tests xml phpmd.xml || exit $?
   cat $SCRIPTDIR/phpstanheader.txt
-  $BIN/phpstan analyse tests --level 4 --no-progress || exit $?
+  $BIN/phpstan analyse tests --level 2 --no-progress || exit $?
 fi
