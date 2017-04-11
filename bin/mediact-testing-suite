@@ -9,8 +9,7 @@ test ! -f phpunit.xml \
 || test ! -x $BIN/phpunit \
 || $BIN/phpunit \
   --fail-on-warning \
-  --disallow-test-output \
-  --report-useless-tests || exit $?
+  --disallow-test-output || exit $?
 
 # Require the coding standards, if they are not explicitly defined.
 test -d $VENDOR/mediact/coding-standard \
