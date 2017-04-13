@@ -31,8 +31,10 @@ do
         test -f phpcs.xml && $BIN/phpcs $directory || exit $?
 
         cat $SCRIPTDIR/phpmdheader.txt
+        # PHPMDs exit codes don't seem to work, so piping stdout to stderr, then
+        # counting the number of warnings and then outputting stderr back to stdout.
         test -f phpmd.xml && $BIN/phpmd $directory text phpmd.xml | \
-            tee /dev/tty | wc -l | (read ps; exit $ps) || exit $?
+            tee /dev/stderr | wc -l 2> /dev/stdout | (read ps; exit $ps) || exit $?
 
         cat $SCRIPTDIR/phpstanheader.txt
         $BIN/phpstan analyse $directory --level 4 --no-progress || exit $?
