@@ -1,7 +1,8 @@
 #!/bin/bash
-SCRIPTDIR="vendor/mediact/testing-suite/bin/"
-VENDOR=$(composer config vendor-dir)
-BIN=$(composer config bin-dir)
+COMPOSER=$(which composer.phar || which composer)
+VENDOR=$($COMPOSER config vendor-dir)
+SCRIPTDIR="$VENDOR/mediact/testing-suite/bin/"
+BIN=$($COMPOSER config bin-dir)
 
 # Run unit tests.
 cat $SCRIPTDIR/phpunitheader.txt
@@ -13,7 +14,7 @@ test ! -f phpunit.xml \
 
 # Require the coding standards, if they are not explicitly defined.
 test -d $VENDOR/mediact/coding-standard \
-|| composer require mediact/coding-standard \
+|| $COMPOSER require mediact/coding-standard \
   --dev \
   --prefer-dist \
   --no-scripts \
@@ -31,8 +32,10 @@ do
         test -f phpcs.xml && $BIN/phpcs $directory || exit $?
 
         cat $SCRIPTDIR/phpmdheader.txt
+        # PHPMDs exit codes don't seem to work, so piping stdout to stderr, then
+        # counting the number of warnings and then outputting stderr back to stdout.
         test -f phpmd.xml && $BIN/phpmd $directory text phpmd.xml | \
-            tee /dev/tty | wc -l | (read ps; exit $ps) || exit $?
+            tee /dev/stderr | wc -l 2> /dev/stdout | (read ps; exit $ps) || exit $?
 
         cat $SCRIPTDIR/phpstanheader.txt
         $BIN/phpstan analyse $directory --level 4 --no-progress || exit $?
