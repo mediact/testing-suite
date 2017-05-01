@@ -1,6 +1,6 @@
 <?php
 
-namespace Mediact\TestingSuite\Composer;
+namespace MediaCT\TestingSuite\Composer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;

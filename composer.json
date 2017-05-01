@@ -29,11 +29,11 @@
   },
   "bin": ["bin/mediact-testing-suite"],
   "extra": {
-    "class": "Mediact\\TestingSuite\\Composer\\Plugin"
+    "class": "MediaCT\\TestingSuite\\Composer\\Plugin"
   },
   "autoload": {
     "psr-4": {
-      "Mediact\\TestingSuite\\Composer\\": "src"
+      "MediaCT\\TestingSuite\\Composer\\": "src"
     }
   }
 }

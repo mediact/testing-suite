@@ -1,6 +1,6 @@
 <?php
 
-namespace Mediact\TestingSuite\Composer;
+namespace MediaCT\TestingSuite\Composer;
 
 use Composer\IO\IOInterface;
 use SplFileObject;
