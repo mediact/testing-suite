@@ -27,12 +27,12 @@ class UnixFileMappingReader implements FileMappingReaderInterface
     /**
      * Constructor.
      *
-     * @param string $mappingFilePaths
+     * @param array $mappingFilePaths
      * @param string $sourceDirectory
      * @param string $targetDirectory
      */
     public function __construct(
-        string $mappingFilePaths,
+        array $mappingFilePaths,
         string $sourceDirectory,
         string $targetDirectory
     ) {
