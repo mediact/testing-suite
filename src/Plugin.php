@@ -43,7 +43,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $this->installer = new Installer(
             new UnixFileMappingReader(
                 $filePaths,
-                __DIR__ . '/../../../../templates/files',
+                __DIR__ . '/../templates/files',
                 getcwd()
             )
         );
@@ -97,7 +97,7 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private function getFilePaths(): array
     {
-        return [__DIR__ . '/../../../../templates/mapping/files', $this->getPhpCsMappingPath()];
+        return [__DIR__ . '/../templates/mapping/files', $this->getPhpCsMappingPath()];
     }
 
     /**
@@ -107,13 +107,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     private function getPhpCsMappingPath(): string
     {
         if (file_exists(getcwd() . 'app/etc/local.xml')) {
-            return __DIR__ . '/../../../../templates/mapping/phpcs/magento1';
+            return __DIR__ . '/../templates/mapping/phpcs/magento1';
         }
 
         if (file_exists(getcwd() . 'app/etc/config.php')) {
-            return __DIR__ . '/../../../../templates/mapping/phpcs/magento2';
+            return __DIR__ . '/../templates/mapping/phpcs/magento2';
         }
 
-        return __DIR__ . '/../../../../templates/mapping/default';
+        return __DIR__ . '/../templates/mapping/default';
     }
 }
