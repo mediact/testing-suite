@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Mediact\\TestingSuite\\": "src/Mediact/TestingSuite"
+      "Mediact\\TestingSuite\\": "src"
     }
   }
 }
