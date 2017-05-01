@@ -114,6 +114,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             return __DIR__ . '/../templates/mapping/phpcs/magento2';
         }
 
-        return __DIR__ . '/../templates/mapping/default';
+        return __DIR__ . '/../templates/mapping/phpcs/default';
     }
 }
