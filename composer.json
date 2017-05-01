@@ -27,5 +27,13 @@
   "require-dev": {
     "composer/composer": "^1.4.1"
   },
-  "bin": ["bin/mediact-testing-suite"]
+  "bin": ["bin/mediact-testing-suite"],
+  "extra": {
+    "class": "Mediact\\TestingSuite\\Composer\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mediact\\TestingSuite\\": "src/MediaCT/TestingSuite"
+    }
+  }
 }
