@@ -22,7 +22,7 @@ pipelines:
           - composer validate --strict --no-interaction
           - export BIN=$(composer config bin-dir)
 
-          - composer require mediact/testing-suite --dev --prefer-dist --no-scripts --ignore-platform-reqs --no-progress --optimize-autoloader --no-interaction  
+          - composer require mediact/testing-suite --dev --prefer-dist --no-scripts --ignore-platform-reqs --no-progress --optimize-autoloader --no-interaction
 
           # Require the coding standards, if they are not explicitly defined.
           # Execute tests from MediaCT testing bundle
