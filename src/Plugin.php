@@ -106,12 +106,14 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     private function getPhpCsMappingPath(): string
     {
-        if (file_exists(getcwd() . '/etc/config.xml')) {
-            return __DIR__ . '/../templates/mapping/phpcs/magento1';
+        $packageType = $this->composer->getPackage()->getType();
+
+        if ($packageType === 'magento2-module') {
+            return __DIR__ . '/../templates/mapping/phpcs/magento2';
         }
 
-        if (file_exists(getcwd() . '/registration.php')) {
-            return __DIR__ . '/../templates/mapping/phpcs/magento2';
+        if ($packageType === 'magento-module') {
+            return __DIR__ . '/../templates/mapping/phpcs/magento1';
         }
 
         return __DIR__ . '/../templates/mapping/phpcs/default';
