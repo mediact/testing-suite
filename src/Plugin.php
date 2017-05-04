@@ -49,7 +49,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         );
     }
 
-
     /**
      * Install the default configuration files.
      *
@@ -63,7 +62,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     {
         $this->installer->install($event->getIO());
     }
-
 
     /**
      * Returns an array of event names this subscriber wants to listen to.
