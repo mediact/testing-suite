@@ -27,18 +27,18 @@ class UnixFileMappingReader implements FileMappingReaderInterface
     /**
      * Constructor.
      *
-     * @param array $mappingFilePaths
-     * @param string $sourceDirectory
-     * @param string $targetDirectory
+     * @param string          $sourceDirectory
+     * @param string          $targetDirectory
+     * @param array|\string[] ...$mappingFilePaths
      */
     public function __construct(
-        array $mappingFilePaths,
         string $sourceDirectory,
-        string $targetDirectory
+        string $targetDirectory,
+        string ...$mappingFilePaths
     ) {
-        $this->mappingFilePaths = $mappingFilePaths;
         $this->sourceDirectory  = $sourceDirectory;
         $this->targetDirectory  = $targetDirectory;
+        $this->mappingFilePaths = $mappingFilePaths;
     }
 
     /**
