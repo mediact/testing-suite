@@ -1,1 +1,0 @@
-this file should be copied in to the main dir as a test
