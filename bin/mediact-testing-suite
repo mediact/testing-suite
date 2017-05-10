@@ -1,7 +1,11 @@
 #!/bin/bash
 COMPOSER=$(which composer.phar || which composer)
 VENDOR=$($COMPOSER config vendor-dir)
-SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
+SCRIPTDIR="$VENDOR/mediact/testing-suite/bin/"
+if [ ! -d "$SCRIPTDIR" ]
+then
+  SCRIPTDIR=$(dirname "${BASH_SOURCE[0]}")
+fi
 BIN=$($COMPOSER config bin-dir)
 
 # Run unit tests.
