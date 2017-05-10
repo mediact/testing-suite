@@ -39,7 +39,7 @@
   },
   "bin": ["bin/mediact-testing-suite"],
   "extra": {
-    "class": "MediaCT\\TestingSuite\\Composer\\Plugin"
+    "class": "Mediact\\TestingSuite\\Composer\\Plugin"
   },
   "autoload": {
     "psr-4": {
