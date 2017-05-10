@@ -1,50 +1,48 @@
 <?php
 
-namespace MediaCT\TestingSuite\Composer;
+namespace Mediact\TestingSuite\Composer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
+use Mediact\Composer\FileInstaller;
+use Mediact\FileMapping\UnixFileMappingReader;
 
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
-    /**
-     * @var Composer
-     */
+    /** @var Composer */
     private $composer;
 
-    /**
-     * @var IOInterface
-     */
-    private $io;
-
-    /**
-     * @var Installer
-     */
+    /** @var FileInstaller */
     private $installer;
 
+    /** @var string[] */
+    private $codingStandardsMapping = [
+        'magento2-module' => 'magento2',
+        'magento-module' => 'magento1'
+    ];
+
     /**
-     * Apply plugin modifications to Composer
+     * Apply plugin modifications to Composer.
      *
      * @param Composer    $composer
      * @param IOInterface $io
      *
      * @return void
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function activate(Composer $composer, IOInterface $io)
     {
         $this->composer = $composer;
-        $this->io       = $io;
 
-        $filePaths = $this->getFilePaths();
-
-        $this->installer = new Installer(
+        $this->installer = new FileInstaller(
             new UnixFileMappingReader(
-                $filePaths,
                 __DIR__ . '/../templates/files',
-                getcwd()
+                getcwd(),
+                ...$this->getFilePaths()
             )
         );
     }
@@ -90,30 +88,27 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     }
 
     /**
-     *
-     * @return array
+     * @return string[]
      */
     private function getFilePaths(): array
     {
-        return [__DIR__ . '/../templates/mapping/files', $this->getPhpCsMappingPath()];
+        return [
+            __DIR__ . '/../templates/mapping/files',
+            $this->getPhpCsMappingPath()
+        ];
     }
 
     /**
-     *
      * @return string
      */
     private function getPhpCsMappingPath(): string
     {
         $packageType = $this->composer->getPackage()->getType();
 
-        if ($packageType === 'magento2-module') {
-            return __DIR__ . '/../templates/mapping/phpcs/magento2';
-        }
+        $file = array_key_exists($packageType, $this->codingStandardsMapping)
+            ? $this->codingStandardsMapping[$packageType]
+            : 'default';
 
-        if ($packageType === 'magento-module') {
-            return __DIR__ . '/../templates/mapping/phpcs/magento1';
-        }
-
-        return __DIR__ . '/../templates/mapping/phpcs/default';
+        return __DIR__ . '/../templates/mapping/phpcs/' . $file;
     }
 }
