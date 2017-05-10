@@ -1,3 +1,0 @@
-#!/bin/bash
-SCRIPTDIR="$(dirname "${BASH_SOURCE[0]}")"
-cat $SCRIPTDIR/*header.txt 
