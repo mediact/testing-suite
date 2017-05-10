@@ -1,9 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: johmanx
- * Date: 5/10/17
- * Time: 2:18 PM
+ * Copyright Mediact. All rights reserved.
+ * https://www.Mediact.nl
  */
 
 namespace Mediact\TestingSuite\Composer\Tests;
@@ -64,7 +62,7 @@ class PluginTest extends TestCase
 
         return $plugin;
     }
-    
+
     /**
      * @depends testActivate
      *
