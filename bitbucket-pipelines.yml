@@ -22,5 +22,5 @@ pipelines:
           - composer validate --strict --no-interaction
           - composer install --dev --prefer-dist --no-scripts --ignore-platform-reqs --no-progress --optimize-autoloader --no-interaction
 
-          # Execute tests from MediaCT testing bundle
-          - bin/mediact-testing-suite
+          # Execute tests from MediaCT testing suite.
+          - composer exec -v mediact-testing-suite
