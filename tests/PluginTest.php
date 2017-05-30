@@ -7,12 +7,15 @@
 namespace Mediact\TestingSuite\Composer\Tests;
 
 use Composer\Package\RootPackageInterface;
+use Mediact\Composer\DependencyInstaller\DependencyInstaller;
 use Mediact\TestingSuite\Composer\Plugin;
 use Composer\Composer;
 use Composer\IO\IOInterface;
 use Composer\Script\Event;
 use PHPUnit\Framework\TestCase;
 use PHPUnit_Framework_MockObject_MockObject;
+use ReflectionMethod;
+use ReflectionProperty;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Plugin
@@ -31,12 +34,12 @@ class PluginTest extends TestCase
         $package  = $this->createMock(RootPackageInterface::class);
 
         $composer
-            ->expects($this->once())
+            ->expects($this->atLeastOnce())
             ->method('getPackage')
             ->willReturn($package);
 
         $package
-            ->expects($this->once())
+            ->expects($this->atLeastOnce())
             ->method('getType')
             ->willReturn($packageType);
 
@@ -48,7 +51,8 @@ class PluginTest extends TestCase
      *
      * @covers ::activate
      * @covers ::getFilePaths
-     * @covers ::getPhpCsMappingPath
+     * @covers ::getPhpCsMappingFile
+     * @covers ::getType
      */
     public function testActivate(): Plugin
     {
@@ -77,7 +81,7 @@ class PluginTest extends TestCase
         $event = $this->createMock(Event::class);
 
         $event
-            ->expects($this->once())
+            ->expects($this->atLeastOnce())
             ->method('getIO')
             ->willReturn($this->createMock(IOInterface::class));
 
@@ -95,8 +99,108 @@ class PluginTest extends TestCase
     public function testGetSubscribesEvents(Plugin $plugin)
     {
         foreach (Plugin::getSubscribedEvents() as $event => $method) {
-            $this->assertTrue(method_exists($plugin, $method));
+            if (is_array($method)) {
+                foreach ($method as $nestedMethod) {
+                    if (is_array($nestedMethod)) {
+                        foreach ($nestedMethod as $deepestMethod) {
+                            $this->assertTrue(
+                                method_exists($plugin, $deepestMethod)
+                            );
+                            break;
+                        }
+                    } else {
+                        $this->assertTrue(method_exists($plugin, $nestedMethod));
+                        break;
+                    }
+                }
+            } else {
+                $this->assertTrue(method_exists($plugin, $method));
+            }
             $this->assertInternalType('string', $event);
         }
+    }
+
+    /**
+     * @depends testActivate
+     *
+     * @param Plugin $plugin
+     *
+     * @return void
+     * @covers ::installRepositories
+     * @covers ::getType
+     */
+    public function testInstallRepositories(Plugin $plugin)
+    {
+        $installer = $this->createMock(DependencyInstaller::class);
+
+        $property = new ReflectionProperty($plugin, 'dependencyInstaller');
+        $property->setAccessible(true);
+        $property->setValue($plugin, $installer);
+        $property->setAccessible(false);
+
+        $method = new ReflectionMethod($plugin, 'getType');
+        $method->setAccessible(true);
+        $type = $method->invoke($plugin);
+        $method->setAccessible(false);
+
+        if ($type === 'default') {
+            $installer
+                ->expects($this->never())
+                ->method('installRepository')
+                ->with(
+                    $this->isType('string'),
+                    $this->isType('string'),
+                    $this->isType('string')
+                );
+        } elseif (in_array($type, ['magento2', 'magento1'])) {
+            $installer
+                ->expects($this->atLeastOnce())
+                ->method('installRepository')
+                ->with(
+                    $this->isType('string'),
+                    $this->isType('string'),
+                    $this->isType('string')
+                );
+        }
+
+        $plugin->installRepositories();
+    }
+
+    /**
+     * @depends testActivate
+     *
+     * @param Plugin $plugin
+     *
+     * @return void
+     * @covers ::installPackages
+     * @covers ::getType
+     */
+    public function testInstallPackages(Plugin $plugin)
+    {
+        $installer = $this->createMock(DependencyInstaller::class);
+
+        $property = new ReflectionProperty($plugin, 'dependencyInstaller');
+        $property->setAccessible(true);
+        $property->setValue($plugin, $installer);
+        $property->setAccessible(false);
+
+        $method = new ReflectionMethod($plugin, 'getType');
+        $method->setAccessible(true);
+        $type = $method->invoke($plugin);
+        $method->setAccessible(false);
+
+        if ($type === 'default') {
+            $installer
+                ->expects($this->never())
+                ->method('installPackage')
+                ->with($this->isType('string'));
+        } elseif (in_array($type, ['magento2', 'magento1'])) {
+            $installer
+                ->expects($this->atLeastOnce())
+                ->method('installPackage')
+                ->with($this->isType('string'));
+        }
+
+        $plugin->installPackages();
     }
 }
