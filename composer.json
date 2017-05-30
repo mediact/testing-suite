@@ -20,13 +20,9 @@
         }
     ],
     "repositories": {
-        "0": {
+        "mediact": {
             "type": "composer",
             "url": "https://composer.mediact.nl"
-        },
-        "magento": {
-            "type": "composer",
-            "url": "https://repo.magento.com"
         }
     },
     "require": {
@@ -39,10 +35,8 @@
         "mediact/composer-file-installer": "^1.0"
     },
     "require-dev": {
-        "mediact/composer-dependency-installer": "dev-feature/PD-594 as 1.0.0",
         "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable",
-        "mediact/coding-standard-magento2": "@stable"
+        "composer/composer": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
