@@ -1,4 +1,4 @@
 <?xml version="1.0"?>
 <ruleset>
-    <rule ref="./vendor/mediact/coding-standard/src/MediactMagento1"/>
+    <rule ref="./vendor/mediact/coding-standard-magento1/src/MediactMagento1"/>
 </ruleset>
