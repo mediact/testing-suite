@@ -28,9 +28,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         'magento-module' => 'magento1'
     ];
 
-    /** @var IOInterface */
-    private $io;
-
     /** @var array */
     private $repositoryMapping = [
         'default' => [],
@@ -54,10 +51,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     private $packageMapping = [
         'default' => [],
         'magento1' => [
-            'mediact/coding-standard-magento1'
+            [
+                'name' => 'mediact/coding-standard-magento1',
+                'version' => '@stable'
+            ]
         ],
         'magento2' => [
-            'mediact/coding-standard-magento2'
+            [
+                'name' => 'mediact/coding-standard-magento2',
+                'version' => '@stable'
+            ]
         ],
     ];
 
@@ -74,7 +77,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public function activate(Composer $composer, IOInterface $io)
     {
         $this->composer            = $composer;
-        $this->io                  = $io;
         $this->dependencyInstaller = new DependencyInstaller();
         $this->fileInstaller       = new FileInstaller(
             new UnixFileMappingReader(
@@ -94,6 +96,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function installFiles(Event $event)
     {
+        $this->fileInstaller->install($event->getIO());
+    }
+
+    /**
+     * Install the required repositories.
+     *
+     * @return void
+     */
+    public function installRepositories()
+    {
         $type = $this->getType();
 
         foreach ($this->repositoryMapping[$type] as $repository) {
@@ -103,12 +115,23 @@ class Plugin implements PluginInterface, EventSubscriberInterface
                 $repository['url']
             );
         }
+    }
+
+    /**
+     * Install the required packages.
+     *
+     * @return void
+     */
+    public function installPackages()
+    {
+        $type = $this->getType();
 
         foreach ($this->packageMapping[$type] as $package) {
-            $this->dependencyInstaller->installPackage($package);
+            $this->dependencyInstaller->installPackage(
+                $package['name'],
+                $package['version']
+            );
         }
-
-        $this->fileInstaller->install($event->getIO());
     }
 
     /**
@@ -119,8 +142,16 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            'post-install-cmd' => 'installFiles',
-            'post-update-cmd' => 'installFiles'
+            'post-install-cmd' => [
+                ['installFiles'],
+                ['installPackages', 1],
+                ['installRepositories', 2]
+            ],
+            'post-update-cmd' => [
+                ['installFiles'],
+                ['installPackages', 1],
+                ['installRepositories', 2]
+            ]
         ];
     }
 
