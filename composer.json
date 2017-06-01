@@ -36,8 +36,7 @@
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable",
-        "mediact/coding-standard-magento1": "dev-feature/PD-594 as 1.0.0"
+        "composer/composer": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
@@ -59,10 +58,9 @@
         "exclude": [
             "tests",
             ".gitignore",
-            "bitbucket-pipelines.yml",
-            "phpcs.xml",
-            "phpmd.xml",
-            "phpunit.xml"
+            "/phpcs.xml",
+            "/phpmd.xml",
+            "/phpunit.xml"
         ]
     }
 }
