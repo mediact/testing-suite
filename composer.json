@@ -36,7 +36,8 @@
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable"
+        "composer/composer": "@stable",
+        "mediact/coding-standard-magento1": "dev-feature/PD-594 as 1.0.0"
     },
     "bin": [
         "bin/mediact-testing-suite"
