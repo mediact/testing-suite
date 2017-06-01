@@ -58,10 +58,9 @@
         "exclude": [
             "tests",
             ".gitignore",
-            "bitbucket-pipelines.yml",
-            "phpcs.xml",
-            "phpmd.xml",
-            "phpunit.xml"
+            "/phpcs.xml",
+            "/phpmd.xml",
+            "/phpunit.xml"
         ]
     }
 }
