@@ -1,0 +1,29 @@
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
+  tasks:
+    phpunit:
+      config_file: ./phpunit.xml
+      metadata:
+        priority: 100
+    composer:
+      no_check_lock: true
+      metadata:
+        priority: 200
+    phpcs:
+      standard: ./phpcs.xml
+      metadata:
+        priority: 300
+    phpmd:
+      exclude: []
+      ruleset: ['./phpmd.xml']
+      triggered_by: ['php']
+      metadata:
+        priority: 400
+    phpstan:
+      autoload_file: ~
+      configuration: ~
+      level: 4
+      triggered_by: ['php']
+      metadata:
+        priority: 500
