@@ -32,7 +32,8 @@
         "phpstan/phpstan": "^0.6.4",
         "composer-plugin-api": "^1.1",
         "mediact/composer-dependency-installer": "^1.0",
-        "mediact/composer-file-installer": "^1.0"
+        "mediact/composer-file-installer": "^1.0",
+        "phpro/grumphp": "^0.11.6"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
@@ -42,6 +43,9 @@
         "bin/mediact-testing-suite"
     ],
     "extra": {
+        "grumphp": {
+            "config-default-path": "config/default/grumphp.yml"
+        },
         "class": "Mediact\\TestingSuite\\Composer\\Plugin"
     },
     "autoload": {
@@ -58,6 +62,7 @@
         "exclude": [
             "tests",
             ".gitignore",
+            "/phpstan.neon",
             "/phpcs.xml",
             "/phpmd.xml",
             "/phpunit.xml"

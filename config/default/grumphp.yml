@@ -1,0 +1,33 @@
+parameters:
+  git_dir: .
+  bin_dir: vendor/bin
+  ascii:
+    failed: ~
+    succeeded: ~
+  tasks:
+    composer:
+      metadata:
+        priority: 1000
+    phpcs:
+      standard: ./phpcs.xml
+      triggered_by: [php]
+      metadata:
+        priority: 800
+    phpmd:
+      exclude: []
+      ruleset:
+        - ./phpmd.xml
+      triggered_by: [php]
+      metadata:
+        priority: 600
+    phpstan:
+      autoload_file: ~
+      configuration: ./phpstan.neon
+      level: 4
+      triggered_by: [php]
+      metadata:
+        priority: 400
+    phpunit:
+      config_file: ./phpunit.xml
+      metadata:
+        priority: 200

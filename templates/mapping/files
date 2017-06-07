@@ -1,3 +1,4 @@
 {../../,}bitbucket-pipelines.yml
-phpunit.xml
-phpmd.xml
+{default/,}phpunit.xml
+{default/,}phpmd.xml
+{default/,}phpstan.neon
