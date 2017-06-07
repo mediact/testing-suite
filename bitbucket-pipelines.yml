@@ -23,4 +23,4 @@ pipelines:
           - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
 
           # Execute tests from MediaCT testing suite.
-          - composer exec -v mediact-testing-suite
+          - composer exec -v grumphp run
