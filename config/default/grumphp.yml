@@ -6,7 +6,6 @@ parameters:
     succeeded: ~
   tasks:
     composer:
-      no_check_lock: true
       metadata:
         priority: 1000
     phpcs:
