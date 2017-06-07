@@ -43,6 +43,9 @@
         "bin/mediact-testing-suite"
     ],
     "extra": {
+        "grumphp": {
+            "config-default-path": "config/default/grumphp.yml"
+        },
         "class": "Mediact\\TestingSuite\\Composer\\Plugin"
     },
     "autoload": {
@@ -59,6 +62,7 @@
         "exclude": [
             "tests",
             ".gitignore",
+            "/phpstan.neon",
             "/phpcs.xml",
             "/phpmd.xml",
             "/phpunit.xml"
