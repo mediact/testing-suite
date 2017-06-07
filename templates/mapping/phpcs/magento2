@@ -1,1 +1,1 @@
-phpcs.xml{.magento2,}
+{magento2/,}phpcs.xml
