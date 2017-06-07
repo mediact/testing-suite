@@ -4,7 +4,9 @@ namespace Mediact\TestingSuite\Composer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
+use Composer\Factory;
 use Composer\IO\IOInterface;
+use Composer\Json\JsonFile;
 use Composer\Plugin\PluginInterface;
 use Composer\Script\Event;
 use Mediact\Composer\DependencyInstaller\DependencyInstaller;
@@ -135,6 +137,35 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     }
 
     /**
+     * Install GrumPHP.
+     *
+     * @return void
+     */
+    public function installGrumPhp()
+    {
+        $composerFile = Factory::getComposerFile();
+        $composerJson = new JsonFile($composerFile);
+        $definition   = $composerJson->read();
+
+        if (!empty($definition['extra']['grumphp']['config-default-path'])) {
+            return;
+        }
+
+        if (!array_key_exists('extra', $definition)) {
+            $definition['extra'] = [];
+        }
+
+        if (!array_key_exists('grumphp', $definition['extra'])) {
+            $definition['extra']['grumphp'] = [];
+        }
+
+        $definition['extra']['grumphp']['config-default-path'] =
+            'vendor/mediact/testing-suite/config/default/grumphp.yml';
+
+        $composerJson->write($definition);
+    }
+
+    /**
      * Subscribe to post update and post install command.
      *
      * @return array
@@ -144,11 +175,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         return [
             'post-install-cmd' => [
                 ['installFiles'],
+                ['installGrumPhp'],
                 ['installPackages', 1],
                 ['installRepositories', 2]
             ],
             'post-update-cmd' => [
                 ['installFiles'],
+                ['installGrumPhp'],
                 ['installPackages', 1],
                 ['installRepositories', 2]
             ]
