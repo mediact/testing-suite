@@ -151,6 +151,13 @@ class Plugin implements PluginInterface, EventSubscriberInterface
             return;
         }
 
+        $workingDir  = dirname($composerFile);
+        $grumPhpFile = $workingDir . DIRECTORY_SEPARATOR . 'grumphp.yml';
+
+        if (file_exists($grumPhpFile)) {
+            unlink($grumPhpFile);
+        }
+
         if (!array_key_exists('extra', $definition)) {
             $definition['extra'] = [];
         }
