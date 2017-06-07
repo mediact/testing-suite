@@ -33,7 +33,7 @@
         "composer-plugin-api": "^1.1",
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
-        "phpro/grumphp": "@stable"
+        "phpro/grumphp": "^0.11.6"
     },
     "require-dev": {
         "phpunit/phpunit": "@stable",
