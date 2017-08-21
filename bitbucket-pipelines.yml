@@ -2,6 +2,8 @@ image: composer/composer:latest
 pipelines:
   default:
     - step:
+        caches:
+          - composer
         script:
           # Show software versions.
           - composer self-update
