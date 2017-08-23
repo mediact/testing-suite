@@ -1,4 +1,4 @@
-image: composer/composer:latest
+image: srcoder/development-php:php71-fpm
 pipelines:
   default:
     - step:
@@ -20,7 +20,7 @@ pipelines:
           - echo "$BITBUCKET_KNOWN_HOSTS" >> $HOME/.ssh/known_hosts
 
           # Composer installation.
-          - echo "$COMPOSER_AUTHENTICATION" > $COMPOSER_HOME/auth.json
+          - composer config --global http-basic.composer.mediact.nl $COMPOSER_MEDIACT_NL_USER $COMPOSER_MEDIACT_NL_PASS
           - composer validate --strict --no-interaction
           - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
 
