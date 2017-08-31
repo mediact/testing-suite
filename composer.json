@@ -2,7 +2,7 @@
     "name": "mediact/testing-suite",
     "description": "Contains MediaCT's default testing packages.",
     "type": "composer-plugin",
-    "license": "proprietary",
+    "license": "MIT",
     "prefer-stable": true,
     "minimum-stability": "stable",
     "authors": [
@@ -19,12 +19,6 @@
             "role": "developer"
         }
     ],
-    "repositories": {
-        "mediact": {
-            "type": "composer",
-            "url": "https://composer.mediact.nl"
-        }
-    },
     "require": {
         "php": "^7.0",
         "mediact/coding-standard": "^1.6",
