@@ -1,9 +1,12 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mediact/testing-suite/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mediact/testing-suite/?branch=master)
+
 # MediaCT Testing Suite
 
 This package serves as an umbrella meta-package for several of MediaCT's testing 
-packages. By requiring these packages here, they're maintainable from a single 
-location. Maintaining them seperately for each project is very inefficient and 
-leads to mistakes.  
+packages. The tests contained within this package assess a PHP project's code quality
+and adherence to coding guidelines. By requiring these packages here, they're 
+maintainable from a single location. Maintaining them seperately for each project 
+is very inefficient and leads to mistakes.  
 
 The "mediact-testing-suite" file contains a series of commands that will need to be run by every pipeline.
 
