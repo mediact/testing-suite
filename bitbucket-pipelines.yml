@@ -1,9 +1,13 @@
 image: srcoder/development-php:php71-fpm
+definitions:
+  caches:
+    vendor: vendor
 pipelines:
   default:
     - step:
         caches:
           - composer
+          - vendor
         script:
           # Show software versions.
           - composer self-update
