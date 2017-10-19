@@ -4,6 +4,7 @@ pipelines:
     - step:
         caches:
           - composer
+          - vendor
         script:
           # Show software versions.
           - composer self-update
