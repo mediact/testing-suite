@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "mediact/coding-standard": "^1.6",
+        "mediact/coding-standard": "@stable",
         "mediact/coding-standard-phpstorm": "^1.0",
         "phpstan/phpstan": "^0.6.4",
         "composer-plugin-api": "^1.1",
