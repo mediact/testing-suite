@@ -51,10 +51,9 @@ class ArchiveExcludeInstaller implements InstallerInterface
     ) {
         $this->resolver    = $resolver;
         $this->io          = $io;
-        $this->file        = $file ?: new JsonFile(Factory::getComposerFile());
-        $this->destination = $destination ?: getcwd();
-
-        $defaults !== null && $this->defaults = $defaults;
+        $this->file        = $file ?? new JsonFile(Factory::getComposerFile());
+        $this->destination = $destination ?? getcwd();
+        $this->defaults    = $defaults ?? $this->defaults;
     }
 
     /**

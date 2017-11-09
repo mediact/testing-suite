@@ -61,9 +61,8 @@ class PackagesInstaller implements InstallerInterface
         $this->composer     = $composer;
         $this->typeResolver = $typeResolver;
         $this->io           = $io;
-        $this->installer    = $installer ?: new DependencyInstaller();
-
-        $mapping !== null && $this->mapping = $mapping;
+        $this->installer    = $installer ?? new DependencyInstaller();
+        $this->mapping      = $mapping ?? $this->mapping;
     }
 
     /**

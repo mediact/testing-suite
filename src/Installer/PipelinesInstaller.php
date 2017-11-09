@@ -22,7 +22,7 @@ class PipelinesInstaller implements InstallerInterface
     /** @var ProcessBuilder */
     private $processBuilder;
 
-    /** @var null|string */
+    /** @var string */
     private $destination;
 
     /** @var string */
@@ -59,12 +59,11 @@ class PipelinesInstaller implements InstallerInterface
     ) {
         $this->fileInstaller  = $fileInstaller;
         $this->io             = $io;
-        $this->processBuilder = $processBuilder ?: new ProcessBuilder();
-        $this->destination    = $destination ?: getcwd();
-
-        $pattern  !== null && $this->pattern  = $pattern;
-        $filename !== null && $this->filename = $filename;
-        $types    !== null && $this->types    = $types;
+        $this->processBuilder = $processBuilder ?? new ProcessBuilder();
+        $this->destination    = $destination ?? getcwd();
+        $this->pattern        = $pattern ?? $this->pattern;
+        $this->filename       = $filename ?? $this->filename;
+        $this->types          = $types ?? $this->types;
     }
 
     /**
@@ -112,7 +111,7 @@ class PipelinesInstaller implements InstallerInterface
         $selected = $this->io->select(
             'Bitbucket has been detected. Which pipelines script do you want to install?',
             $labels,
-            0
+            key($labels)
         );
 
         return $keys[$selected];

@@ -35,8 +35,8 @@ class GrumPhpInstaller implements InstallerInterface
     ) {
         $this->file        = $file;
         $this->io          = $io;
-        $this->file        = $file ?: new JsonFile(Factory::getComposerFile());
-        $this->destination = $destination ?: getcwd();
+        $this->file        = $file ?? new JsonFile(Factory::getComposerFile());
+        $this->destination = $destination ?? getcwd();
     }
 
     /**
