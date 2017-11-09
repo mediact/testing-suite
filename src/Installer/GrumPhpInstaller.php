@@ -63,14 +63,6 @@ class GrumPhpInstaller implements InstallerInterface
             return;
         }
 
-        if (!array_key_exists('extra', $definition)) {
-            $definition['extra'] = [];
-        }
-
-        if (!array_key_exists('grumphp', $definition['extra'])) {
-            $definition['extra']['grumphp'] = [];
-        }
-
         $definition['extra']['grumphp']['config-default-path'] =
             'vendor/mediact/testing-suite/config/default/grumphp.yml';
 
