@@ -101,9 +101,9 @@ class PipelinesInstaller implements InstallerInterface
     /**
      * Choose the mapping to install.
      *
-     * @return mixed
+     * @return string
      */
-    private function chooseMapping()
+    private function chooseMapping():string
     {
         $labels = array_values($this->types);
         $keys   = array_keys($this->types);
