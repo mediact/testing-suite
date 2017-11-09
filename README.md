@@ -62,7 +62,7 @@ expected to be in a directory called `src`.
 
 When the project is hosted on Bitbucket a 
 [Pipelines](https://bitbucket.org/product/features/pipelines) script will be
-installed. There a two choices for the Pipelines script:
+installed. There are two choices for the Pipelines script:
 
 - Basic pipelines script. This script does a composer install and executes
 the testing suite.
