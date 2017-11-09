@@ -17,9 +17,7 @@ use Mediact\TestingSuite\Composer\Installer\PipelinesInstaller;
 
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
-    /**
-     * @var InstallerInterface[]
-     */
+    /** @var InstallerInterface[] */
     private $installers;
 
     /**

@@ -19,6 +19,12 @@ class PipelinesInstaller implements InstallerInterface
     /** @var IOInterface */
     private $io;
 
+    /** @var ProcessBuilder */
+    private $processBuilder;
+
+    /** @var null|string */
+    private $destination;
+
     /** @var string */
     private $pattern = 'bitbucket.org';
 
@@ -30,14 +36,6 @@ class PipelinesInstaller implements InstallerInterface
         'mediact' => 'MediaCT pipelines script',
         'basic'   => 'Basic pipelines script'
     ];
-    /**
-     * @var null|string
-     */
-    private $destination;
-    /**
-     * @var ProcessBuilder
-     */
-    private $processBuilder;
 
     /**
      * Constructor.
