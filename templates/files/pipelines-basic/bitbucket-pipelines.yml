@@ -1,0 +1,22 @@
+image: srcoder/development-php:php71-fpm
+definitions:
+  caches:
+    vendor: vendor
+pipelines:
+  default:
+    - step:
+        caches:
+          - composer
+          - vendor
+        script:
+          # Show software versions.
+          - composer self-update
+          - composer --version
+          - php -v
+
+          # Composer installation.
+          - composer validate --strict --no-interaction
+          - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
+
+          # Execute tests from MediaCT testing suite.
+          - composer exec -v grumphp run
