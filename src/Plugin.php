@@ -39,8 +39,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      * @param IOInterface $io
      *
      * @return void
-     *
-     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function activate(Composer $composer, IOInterface $io)
     {
