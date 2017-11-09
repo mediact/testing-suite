@@ -30,8 +30,8 @@
         "phpro/grumphp": "^0.11.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable"
+        "composer/composer": "@stable",
+        "mikey179/vfsstream": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
