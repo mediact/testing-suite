@@ -126,10 +126,12 @@ class PipelinesInstaller implements InstallerInterface
     private function isBitbucket(): bool
     {
         $process = $this->processBuilder
-            ->setPrefix('git remote -v')
+            ->setPrefix('/usr/bin/env')
+            ->setArguments(['git', 'remote', '-v'])
             ->getProcess();
 
         $process->run();
+
         return strpos($process->getOutput(), $this->pattern) !== false;
     }
 }

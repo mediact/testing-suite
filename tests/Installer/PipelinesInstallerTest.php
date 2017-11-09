@@ -51,6 +51,11 @@ class PipelinesInstallerTest extends TestCase
 
         $processBuilder
             ->expects(self::any())
+            ->method('setArguments')
+            ->willReturnSelf();
+
+        $processBuilder
+            ->expects(self::any())
             ->method('getProcess')
             ->willReturn($process);
 
