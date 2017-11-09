@@ -31,8 +31,7 @@ class ProjectTypeResolver
     public function __construct(Composer $composer, array $mapping = null)
     {
         $this->composer = $composer;
-
-        is_array($mapping) && $this->mapping = $mapping;
+        $this->mapping  = $mapping ?? $this->mapping;
     }
 
     /**
