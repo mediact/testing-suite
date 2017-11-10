@@ -64,9 +64,7 @@ class ArchiveExcludeInstaller implements InstallerInterface
     public function install()
     {
         $definition = $this->file->read();
-        $excluded   = isset($definition['archive']['exclude'])
-            ? $definition['archive']['exclude']
-            : [];
+        $excluded   = $definition['archive']['exclude'] ?? [];
 
         $excluded = array_map(
             function (string $exclude): string {
