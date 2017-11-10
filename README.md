@@ -8,7 +8,7 @@ packages.
 # Installation
 
 ```
-composer require mediact/tetsing-suite --dev
+composer require mediact/testing-suite --dev
 ```
 
 # Usage
