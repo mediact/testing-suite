@@ -15,7 +15,6 @@ use Mediact\TestingSuite\Composer\MappingResolver;
 use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 
 /**
- * @codeCoverageIgnoreFile
  * @var Composer\Composer       $composer
  * @var Composer\IO\IOInterface $io
  */
