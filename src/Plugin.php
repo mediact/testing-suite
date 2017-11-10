@@ -6,14 +6,7 @@ use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
 use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
-use Mediact\Composer\FileInstaller;
-use Mediact\FileMapping\UnixFileMappingReader;
-use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
-use Mediact\TestingSuite\Composer\Installer\FilesInstaller;
-use Mediact\TestingSuite\Composer\Installer\GrumPhpInstaller;
 use Mediact\TestingSuite\Composer\Installer\InstallerInterface;
-use Mediact\TestingSuite\Composer\Installer\PackagesInstaller;
-use Mediact\TestingSuite\Composer\Installer\PipelinesInstaller;
 
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
@@ -40,17 +33,21 @@ class Plugin implements PluginInterface, EventSubscriberInterface
      */
     public function activate(Composer $composer, IOInterface $io)
     {
-        $typeResolver    = new ProjectTypeResolver($composer);
-        $mappingResolver = new MappingResolver($typeResolver);
-        $fileInstaller   = new FileInstaller(
-            new UnixFileMappingReader('', '')
+        $this->addInstallers(
+            ...include __DIR__ . '/installers.php'
         );
+    }
 
-        $this->installers[] = new FilesInstaller($mappingResolver, $fileInstaller, $io);
-        $this->installers[] = new GrumPhpInstaller($io);
-        $this->installers[] = new ArchiveExcludeInstaller($mappingResolver, $io);
-        $this->installers[] = new PackagesInstaller($composer, $typeResolver, $io);
-        $this->installers[] = new PipelinesInstaller($fileInstaller, $io);
+    /**
+     * Add installers.
+     *
+     * @param InstallerInterface[] ...$installers
+     *
+     * @return void
+     */
+    public function addInstallers(InstallerInterface ...$installers)
+    {
+        $this->installers = array_merge($this->installers, $installers);
     }
 
     /**

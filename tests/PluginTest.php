@@ -22,6 +22,7 @@ class PluginTest extends TestCase
      * @return void
      *
      * @covers ::activate
+     * @covers ::addInstallers
      */
     public function testActivate()
     {
