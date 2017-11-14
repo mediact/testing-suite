@@ -6,15 +6,11 @@
 
 namespace Mediact\TestingSuite\Composer\Tests;
 
-use Composer\Package\RootPackageInterface;
-use Mediact\Composer\DependencyInstaller\DependencyInstaller;
-use Mediact\TestingSuite\Composer\Plugin;
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Composer\Script\Event;
+use Mediact\TestingSuite\Composer\Installer\InstallerInterface;
+use Mediact\TestingSuite\Composer\Plugin;
 use PHPUnit\Framework\TestCase;
-use PHPUnit_Framework_MockObject_MockObject;
-use ReflectionMethod;
 use ReflectionProperty;
 
 /**
@@ -23,184 +19,64 @@ use ReflectionProperty;
 class PluginTest extends TestCase
 {
     /**
-     * @param string $packageType
-     *
-     * @return Composer
-     */
-    private function createComposer(string $packageType = 'project'): Composer
-    {
-        /** @var Composer|PHPUnit_Framework_MockObject_MockObject $composer */
-        $composer = $this->createMock(Composer::class);
-        $package  = $this->createMock(RootPackageInterface::class);
-
-        $composer
-            ->expects($this->atLeastOnce())
-            ->method('getPackage')
-            ->willReturn($package);
-
-        $package
-            ->expects($this->atLeastOnce())
-            ->method('getType')
-            ->willReturn($packageType);
-
-        return $composer;
-    }
-
-    /**
-     * @return Plugin
+     * @return void
      *
      * @covers ::activate
-     * @covers ::getFilePaths
-     * @covers ::getPhpCsMappingFile
-     * @covers ::getType
+     * @covers ::addInstallers
      */
-    public function testActivate(): Plugin
+    public function testActivate()
     {
-        /** @var IOInterface $ioMock */
-        $ioMock = $this->createMock(IOInterface::class);
         $plugin = new Plugin();
+        $plugin->activate(
+            $this->createMock(Composer::class),
+            $this->createMock(IOInterface::class)
+        );
 
-        $plugin->activate($this->createComposer(), $ioMock);
-        $plugin->activate($this->createComposer('magento-module'), $ioMock);
-        $plugin->activate($this->createComposer('magento2-module'), $ioMock);
+        $reflection = new ReflectionProperty(Plugin::class, 'installers');
+        $reflection->setAccessible(true);
 
-        return $plugin;
+        $this->assertContainsOnlyInstancesOf(
+            InstallerInterface::class,
+            $reflection->getValue($plugin)
+        );
     }
 
     /**
-     * @depends testActivate
-     *
-     * @param Plugin $plugin
-     *
      * @return void
-     * @covers ::installFiles
+     *
+     * @covers ::__construct
+     * @covers ::install
      */
-    public function testInstallFiles(Plugin $plugin)
+    public function testInstall()
     {
-        /** @var Event|PHPUnit_Framework_MockObject_MockObject $event */
-        $event = $this->createMock(Event::class);
+        $installers = [
+            $this->createMock(InstallerInterface::class),
+            $this->createMock(InstallerInterface::class)
+        ];
 
-        $event
-            ->expects($this->atLeastOnce())
-            ->method('getIO')
-            ->willReturn($this->createMock(IOInterface::class));
+        foreach ($installers as $installer) {
+            $installer
+                ->expects(self::once())
+                ->method('install');
+        }
 
-        $plugin->installFiles($event);
+        $plugin = new Plugin(...$installers);
+        $plugin->install();
     }
 
     /**
-     * @depends testActivate
-     *
-     * @param Plugin $plugin
-     *
      * @return void
+     *
      * @covers ::getSubscribedEvents
      */
-    public function testGetSubscribesEvents(Plugin $plugin)
+    public function testGetSubscribesEvents()
     {
-        foreach (Plugin::getSubscribedEvents() as $event => $method) {
-            if (is_array($method)) {
-                foreach ($method as $nestedMethod) {
-                    if (is_array($nestedMethod)) {
-                        foreach ($nestedMethod as $deepestMethod) {
-                            $this->assertTrue(
-                                method_exists($plugin, $deepestMethod)
-                            );
-                            break;
-                        }
-                    } else {
-                        $this->assertTrue(method_exists($plugin, $nestedMethod));
-                        break;
-                    }
-                }
-            } else {
+        $plugin = new Plugin();
+
+        foreach (Plugin::getSubscribedEvents() as $event => $methods) {
+            foreach ($methods as $method) {
                 $this->assertTrue(method_exists($plugin, $method));
             }
-            $this->assertInternalType('string', $event);
         }
-    }
-
-    /**
-     * @depends testActivate
-     *
-     * @param Plugin $plugin
-     *
-     * @return void
-     * @covers ::installRepositories
-     * @covers ::getType
-     */
-    public function testInstallRepositories(Plugin $plugin)
-    {
-        $installer = $this->createMock(DependencyInstaller::class);
-
-        $property = new ReflectionProperty($plugin, 'dependencyInstaller');
-        $property->setAccessible(true);
-        $property->setValue($plugin, $installer);
-        $property->setAccessible(false);
-
-        $method = new ReflectionMethod($plugin, 'getType');
-        $method->setAccessible(true);
-        $type = $method->invoke($plugin);
-        $method->setAccessible(false);
-
-        if ($type === 'default') {
-            $installer
-                ->expects($this->never())
-                ->method('installRepository')
-                ->with(
-                    $this->isType('string'),
-                    $this->isType('string'),
-                    $this->isType('string')
-                );
-        } elseif (in_array($type, ['magento2', 'magento1'])) {
-            $installer
-                ->expects($this->atLeastOnce())
-                ->method('installRepository')
-                ->with(
-                    $this->isType('string'),
-                    $this->isType('string'),
-                    $this->isType('string')
-                );
-        }
-
-        $plugin->installRepositories();
-    }
-
-    /**
-     * @depends testActivate
-     *
-     * @param Plugin $plugin
-     *
-     * @return void
-     * @covers ::installPackages
-     * @covers ::getType
-     */
-    public function testInstallPackages(Plugin $plugin)
-    {
-        $installer = $this->createMock(DependencyInstaller::class);
-
-        $property = new ReflectionProperty($plugin, 'dependencyInstaller');
-        $property->setAccessible(true);
-        $property->setValue($plugin, $installer);
-        $property->setAccessible(false);
-
-        $method = new ReflectionMethod($plugin, 'getType');
-        $method->setAccessible(true);
-        $type = $method->invoke($plugin);
-        $method->setAccessible(false);
-
-        if ($type === 'default') {
-            $installer
-                ->expects($this->never())
-                ->method('installPackage')
-                ->with($this->isType('string'));
-        } elseif (in_array($type, ['magento2', 'magento1'])) {
-            $installer
-                ->expects($this->atLeastOnce())
-                ->method('installPackage')
-                ->with($this->isType('string'));
-        }
-
-        $plugin->installPackages();
     }
 }

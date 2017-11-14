@@ -22,7 +22,9 @@
     "require": {
         "php": "^7.0",
         "mediact/coding-standard": "@stable",
-        "mediact/coding-standard-phpstorm": "^1.0",
+        "mediact/coding-standard-phpstorm": "@stable",
+        "phpunit/phpunit": "@stable",
+        "kint-php/kint": "@stable",
         "phpstan/phpstan": "^0.6.4",
         "composer-plugin-api": "^1.1",
         "mediact/composer-dependency-installer": "^1.0",
@@ -30,8 +32,8 @@
         "phpro/grumphp": "^0.11.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable"
+        "composer/composer": "@stable",
+        "mikey179/vfsstream": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
