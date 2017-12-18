@@ -5,18 +5,18 @@ definitions:
 pipelines:
   default:
     - step:
+        name: Composer validation
+        script:
+          - composer show --platform
+          - composer validate --strict --no-interaction
+
+    - step:
+        name: Testing suite
         caches:
           - composer
           - vendor
         script:
-          # Show software versions.
           - composer self-update
-          - composer --version
-          - php -v
-
-          # Composer installation.
-          - composer validate --strict --no-interaction
           - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
-
-          # Execute tests from MediaCT testing suite.
+          - composer show
           - composer exec -v grumphp run
