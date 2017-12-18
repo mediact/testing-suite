@@ -56,8 +56,9 @@
     },
     "archive": {
         "exclude": [
-            "tests",
-            ".gitignore",
+            "/tests",
+            "/.gitignore",
+            "/.gitattributes",
             "/phpstan.neon",
             "/phpcs.xml",
             "/phpmd.xml",
