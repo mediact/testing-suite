@@ -24,9 +24,9 @@ class GrumPhpInstaller implements InstallerInterface
     /**
      * Constructor.
      *
-     * @param IOInterface|null $io
-     * @param JsonFile         $file
-     * @param string|null      $destination
+     * @param IOInterface $io
+     * @param JsonFile    $file
+     * @param string|null $destination
      */
     public function __construct(
         IOInterface $io,
