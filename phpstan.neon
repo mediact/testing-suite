@@ -1,6 +1,3 @@
 parameters:
   excludes_analyse:
     - src/installers.php
-  ignoreErrors:
-    - '#(class|type) Magento\\TestFramework#i'
-    - '#(class|type) Magento\\\S*Factory#i'
