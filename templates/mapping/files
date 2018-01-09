@@ -1,3 +1,3 @@
-{default/,}phpunit.xml
+{default/,}phpunit{_dist,}.xml
 {default/,}phpmd.xml
 {default/,}phpstan.neon

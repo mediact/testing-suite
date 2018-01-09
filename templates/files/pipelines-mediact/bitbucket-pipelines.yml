@@ -5,28 +5,19 @@ definitions:
 pipelines:
   default:
     - step:
+        name: Composer validation
+        script:
+          - composer show --platform
+          - composer validate --strict --no-interaction
+
+    - step:
+        name: Testing suite
         caches:
           - composer
           - vendor
         script:
-          # Show software versions.
           - composer self-update
-          - composer --version
-          - php -v
-
-          # Install SSH keys.
-          - mkdir -p $HOME/.ssh
-          - chmod 700 $HOME/.ssh
-
-          - echo "$PIPELINES_PRIVATE_KEY" | sed 's/\\n/\n/g' | cat > $HOME/.ssh/id_rsa
-          - chmod 600 $HOME/.ssh/id_rsa
-
-          - echo "$BITBUCKET_KNOWN_HOSTS" >> $HOME/.ssh/known_hosts
-
-          # Composer installation.
           - composer config --global http-basic.composer.mediact.nl $COMPOSER_MEDIACT_NL_USER $COMPOSER_MEDIACT_NL_PASS
-          - composer validate --strict --no-interaction
           - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
-
-          # Execute tests from MediaCT testing suite.
+          - composer show
           - composer exec -v grumphp run
