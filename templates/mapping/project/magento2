@@ -1,1 +1,2 @@
 {magento2/,}phpcs.xml
+{magento2/,}phpstan.neon
