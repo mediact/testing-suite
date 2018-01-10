@@ -7,7 +7,8 @@ pipelines:
     - step:
         name: Composer validation
         script:
-          - composer show --platform
+          - composer self-update
+          - composer check-platform-reqs
           - composer validate --strict --no-interaction
 
     - step:
