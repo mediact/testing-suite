@@ -108,7 +108,8 @@ class PipelinesInstaller implements InstallerInterface
             key($labels)
         );
 
-        return $keys[$selected];
+        return is_numeric($selected) ? $keys[$selected]
+            : array_search($selected, $this->types);
     }
 
     /**
