@@ -9,7 +9,7 @@ namespace Mediact\TestingSuite\Composer\Installer;
 use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMapping;
-use Symfony\Component\Process\ProcessBuilder;
+use Symfony\Component\Process\Process;
 
 class PipelinesInstaller implements InstallerInterface
 {
@@ -18,9 +18,6 @@ class PipelinesInstaller implements InstallerInterface
 
     /** @var IOInterface */
     private $io;
-
-    /** @var ProcessBuilder */
-    private $processBuilder;
 
     /** @var string */
     private $destination;
@@ -42,7 +39,6 @@ class PipelinesInstaller implements InstallerInterface
      *
      * @param FileInstaller  $fileInstaller
      * @param IOInterface    $io
-     * @param ProcessBuilder $processBuilder
      * @param string|null    $destination
      * @param string|null    $pattern
      * @param string|null    $filename
@@ -51,7 +47,6 @@ class PipelinesInstaller implements InstallerInterface
     public function __construct(
         FileInstaller $fileInstaller,
         IOInterface $io,
-        ProcessBuilder $processBuilder = null,
         string $destination = null,
         string $pattern = null,
         string $filename = null,
@@ -59,7 +54,6 @@ class PipelinesInstaller implements InstallerInterface
     ) {
         $this->fileInstaller  = $fileInstaller;
         $this->io             = $io;
-        $this->processBuilder = $processBuilder ?? new ProcessBuilder();
         $this->destination    = $destination ?? getcwd();
         $this->pattern        = $pattern ?? $this->pattern;
         $this->filename       = $filename ?? $this->filename;
@@ -124,11 +118,7 @@ class PipelinesInstaller implements InstallerInterface
      */
     private function isBitbucket(): bool
     {
-        $process = $this->processBuilder
-            ->setPrefix('/usr/bin/env')
-            ->setArguments(['git', 'remote', '-v'])
-            ->getProcess();
-
+        $process = new Process('git remote -v');
         $process->run();
 
         return strpos($process->getOutput(), $this->pattern) !== false;
