@@ -8,6 +8,7 @@ namespace Mediact\TestingSuite\Composer\Tests\Installer;
 
 use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
+use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -40,24 +41,9 @@ class PipelinesInstallerTest extends TestCase
     ) {
         $fileInstaller  = $this->createMock(FileInstaller::class);
         $io             = $this->createMock(IOInterface::class);
-        $processBuilder = $this->createMock(ProcessBuilder::class);
+        $processFactory = $this->createMock(ProcessFactoryInterface::class);
         $process        = $this->createMock(Process::class);
         $filesystem     = $this->createFilesystem($files);
-
-        $processBuilder
-            ->expects(self::any())
-            ->method('setPrefix')
-            ->willReturnSelf();
-
-        $processBuilder
-            ->expects(self::any())
-            ->method('setArguments')
-            ->willReturnSelf();
-
-        $processBuilder
-            ->expects(self::any())
-            ->method('getProcess')
-            ->willReturn($process);
 
         $process
             ->expects(self::any())
@@ -68,6 +54,11 @@ class PipelinesInstallerTest extends TestCase
             ->method('getOutput')
             ->willReturn($remotes);
 
+        $processFactory
+            ->expects(self::any())
+            ->method('create')
+            ->willReturn($process);
+
         if ($expectedInstall) {
             $fileInstaller
                 ->expects(self::once())
@@ -76,7 +67,7 @@ class PipelinesInstallerTest extends TestCase
             $io
                 ->expects(self::once())
                 ->method('select')
-                    ->willReturn('0');
+                ->willReturn('0');
         } else {
             $fileInstaller
                 ->expects(self::never())
@@ -86,7 +77,7 @@ class PipelinesInstallerTest extends TestCase
         $installer = new PipelinesInstaller(
             $fileInstaller,
             $io,
-            $processBuilder,
+            $processFactory,
             $filesystem->url()
         );
 

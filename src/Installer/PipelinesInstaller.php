@@ -9,6 +9,7 @@ namespace Mediact\TestingSuite\Composer\Installer;
 use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMapping;
+use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
 use Symfony\Component\Process\Process;
 
 class PipelinesInstaller implements InstallerInterface
@@ -18,6 +19,9 @@ class PipelinesInstaller implements InstallerInterface
 
     /** @var IOInterface */
     private $io;
+
+    /** @var ProcessFactoryInterface */
+    private $processFactory;
 
     /** @var string */
     private $destination;
@@ -37,16 +41,18 @@ class PipelinesInstaller implements InstallerInterface
     /**
      * Constructor.
      *
-     * @param FileInstaller  $fileInstaller
-     * @param IOInterface    $io
-     * @param string|null    $destination
-     * @param string|null    $pattern
-     * @param string|null    $filename
-     * @param array|null     $types
+     * @param FileInstaller           $fileInstaller
+     * @param IOInterface             $io
+     * @param ProcessFactoryInterface $processFactory
+     * @param string|null             $destination
+     * @param string|null             $pattern
+     * @param string|null             $filename
+     * @param array|null              $types
      */
     public function __construct(
         FileInstaller $fileInstaller,
         IOInterface $io,
+        ProcessFactoryInterface $processFactory,
         string $destination = null,
         string $pattern = null,
         string $filename = null,
@@ -54,6 +60,7 @@ class PipelinesInstaller implements InstallerInterface
     ) {
         $this->fileInstaller  = $fileInstaller;
         $this->io             = $io;
+        $this->processFactory = $processFactory;
         $this->destination    = $destination ?? getcwd();
         $this->pattern        = $pattern ?? $this->pattern;
         $this->filename       = $filename ?? $this->filename;
@@ -119,7 +126,7 @@ class PipelinesInstaller implements InstallerInterface
      */
     private function isBitbucket(): bool
     {
-        $process = new Process('git remote -v');
+        $process = $this->processFactory->create('git remote -v');
         $process->run();
 
         return strpos($process->getOutput(), $this->pattern) !== false;
