@@ -6,6 +6,7 @@
 
 use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMappingReader;
+use Mediact\TestingSuite\Composer\Factory\ProcessFactory;
 use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
 use Mediact\TestingSuite\Composer\Installer\FilesInstaller;
 use Mediact\TestingSuite\Composer\Installer\GrumPhpInstaller;
@@ -24,11 +25,12 @@ $mappingResolver = new MappingResolver($typeResolver);
 $fileInstaller   = new FileInstaller(
     new UnixFileMappingReader('', '')
 );
+$processFactory  = new ProcessFactory();
 
 return [
     new FilesInstaller($mappingResolver, $fileInstaller, $io),
     new GrumPhpInstaller($io),
     new ArchiveExcludeInstaller($mappingResolver, $io),
     new PackagesInstaller($composer, $typeResolver, $io),
-    new PipelinesInstaller($fileInstaller, $io),
+    new PipelinesInstaller($fileInstaller, $io, $processFactory),
 ];
