@@ -10,7 +10,6 @@ use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMapping;
 use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
-use Symfony\Component\Process\Process;
 
 class PipelinesInstaller implements InstallerInterface
 {
@@ -32,12 +31,6 @@ class PipelinesInstaller implements InstallerInterface
     /** @var string */
     private $filename = 'bitbucket-pipelines.yml';
 
-    /** @var array */
-    private $types = [
-        'mediact' => 'MediaCT pipelines script',
-        'basic'   => 'Basic pipelines script'
-    ];
-
     /**
      * Constructor.
      *
@@ -47,7 +40,6 @@ class PipelinesInstaller implements InstallerInterface
      * @param string|null             $destination
      * @param string|null             $pattern
      * @param string|null             $filename
-     * @param array|null              $types
      */
     public function __construct(
         FileInstaller $fileInstaller,
@@ -55,8 +47,7 @@ class PipelinesInstaller implements InstallerInterface
         ProcessFactoryInterface $processFactory,
         string $destination = null,
         string $pattern = null,
-        string $filename = null,
-        array $types = null
+        string $filename = null
     ) {
         $this->fileInstaller  = $fileInstaller;
         $this->io             = $io;
@@ -64,7 +55,6 @@ class PipelinesInstaller implements InstallerInterface
         $this->destination    = $destination ?? getcwd();
         $this->pattern        = $pattern ?? $this->pattern;
         $this->filename       = $filename ?? $this->filename;
-        $this->types          = $types ?? $this->types;
     }
 
     /**
