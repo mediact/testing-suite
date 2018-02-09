@@ -31,7 +31,6 @@ class PipelinesInstallerTest extends TestCase
      *
      * @covers ::__construct
      * @covers ::install
-     * @covers ::chooseMapping
      * @covers ::isBitbucket
      */
     public function testInstall(
@@ -63,11 +62,6 @@ class PipelinesInstallerTest extends TestCase
             $fileInstaller
                 ->expects(self::once())
                 ->method('installFile');
-
-            $io
-                ->expects(self::once())
-                ->method('select')
-                ->willReturn('0');
         } else {
             $fileInstaller
                 ->expects(self::never())
