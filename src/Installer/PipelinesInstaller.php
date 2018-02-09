@@ -80,12 +80,8 @@ class PipelinesInstaller implements InstallerInterface
             return;
         }
 
-
         $mapping = new UnixFileMapping(
-            sprintf(
-                __DIR__ . '/../../templates/files/pipelines-%s',
-                $this->chooseMapping()
-            ),
+            __DIR__ . '/../../templates/files/pipelines',
             $this->destination,
             $this->filename
         );
@@ -97,26 +93,6 @@ class PipelinesInstaller implements InstallerInterface
                 $mapping->getRelativeDestination()
             )
         );
-    }
-
-    /**
-     * Choose the mapping to install.
-     *
-     * @return string
-     */
-    private function chooseMapping():string
-    {
-        $labels = array_values($this->types);
-        $keys   = array_keys($this->types);
-
-        $selected = $this->io->select(
-            'Bitbucket has been detected. Which pipelines script do you want to install?',
-            $labels,
-            key($labels)
-        );
-
-        return is_numeric($selected) ? $keys[$selected]
-            : array_search($selected, $this->types);
     }
 
     /**

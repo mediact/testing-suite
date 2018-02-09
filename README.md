@@ -62,12 +62,17 @@ expected to be in a directory called `src`.
 
 When the project is hosted on Bitbucket a 
 [Pipelines](https://bitbucket.org/product/features/pipelines) script will be
-installed. There are two choices for the Pipelines script:
+installed. The scripts supports a callback that will be called before 
+`composer install` is executed. This callback can be used to add credentials
+to composer. To enable the callback go to **Bitbucket Settings > Pipelines >
+Environment Variables** and add an environment variable called 
+`COMPOSER_PRE_INSTALL_CALLBACK`.
 
-- Basic pipelines script. This script does a composer install and executes
-the testing suite.
-- MediaCT pipelines script. This script adds SSH keys and authentication for 
-the composer repository of MediaCT before running the composer install.
+Example to add basic authentication for repo.example.com:
+
+```
+composer config --global http-basic.repo.example.com $YOUR_USER $YOUR_PASSWORD
+```
 
 # Integration with PHPStorm
 
