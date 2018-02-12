@@ -21,7 +21,7 @@
     ],
     "require": {
         "php": "^7.0",
-        "mediact/coding-standard": "@stable",
+        "mediact/coding-standard": "^2.0",
         "mediact/coding-standard-phpstorm": "^1.0",
         "phpstan/phpstan": "^0.6.4",
         "composer-plugin-api": "^1.1",
@@ -30,8 +30,8 @@
         "phpro/grumphp": "^0.11.6"
     },
     "require-dev": {
-        "phpunit/phpunit": "@stable",
-        "composer/composer": "@stable"
+        "phpunit/phpunit": "^6.5",
+        "composer/composer": "^1.6"
     },
     "bin": [
         "bin/mediact-testing-suite"

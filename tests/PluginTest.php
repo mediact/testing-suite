@@ -116,6 +116,7 @@ class PluginTest extends TestCase
             } else {
                 $this->assertTrue(method_exists($plugin, $method));
             }
+            
             $this->assertInternalType('string', $event);
         }
     }
