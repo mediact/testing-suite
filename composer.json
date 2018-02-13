@@ -21,15 +21,15 @@
     ],
     "require": {
         "php": "^7.0",
-        "mediact/coding-standard": "@stable",
-        "mediact/coding-standard-phpstorm": "@stable",
-        "phpunit/phpunit": "@stable",
-        "kint-php/kint": "@stable",
-        "phpstan/phpstan": "@stable",
+        "mediact/coding-standard": "^2.0",
+        "mediact/coding-standard-phpstorm": "^1.5",
+        "phpunit/phpunit": "^6.5",
+        "kint-php/kint": "^2.2",
+        "phpstan/phpstan": "^0.9",
         "composer-plugin-api": "^1.1",
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
-        "phpro/grumphp": "@stable"
+        "phpro/grumphp": "^0.13"
     },
     "require-dev": {
         "composer/composer": "@stable",
