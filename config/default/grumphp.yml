@@ -6,6 +6,7 @@ parameters:
     succeeded: ~
   tasks:
     composer:
+      strict: true
       metadata:
         priority: 1000
     phpcs:
