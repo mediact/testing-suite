@@ -29,6 +29,9 @@ class ArchiveExcludeInstaller implements InstallerInterface
     /** @var array */
     private $defaults = [
         '/bitbucket-pipelines.yml',
+        '/examples',
+        '/example',
+        '/.gitattributes',
         '/.gitignore',
         '/tests'
     ];
