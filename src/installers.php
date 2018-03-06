@@ -14,6 +14,7 @@ use Mediact\TestingSuite\Composer\Installer\PackagesInstaller;
 use Mediact\TestingSuite\Composer\Installer\PipelinesInstaller;
 use Mediact\TestingSuite\Composer\MappingResolver;
 use Mediact\TestingSuite\Composer\ProjectTypeResolver;
+use Mediact\TestingSuite\Composer\ConfigResolver;
 
 /**
  * @var Composer\Composer       $composer
@@ -22,6 +23,7 @@ use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 
 $typeResolver    = new ProjectTypeResolver($composer);
 $mappingResolver = new MappingResolver($typeResolver);
+$configResolver  = new ConfigResolver($typeResolver);
 $fileInstaller   = new FileInstaller(
     new UnixFileMappingReader('', '')
 );
