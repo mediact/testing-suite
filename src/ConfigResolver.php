@@ -12,7 +12,7 @@ class ConfigResolver
     private $typeResolver;
 
     /** @var string */
-    private $template = __DIR__  . '/../templates/config/%s.json';
+    private $template = __DIR__ . '/../templates/config/%s.json';
 
     /**
      * Constructor.
