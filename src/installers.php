@@ -8,6 +8,7 @@ use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMappingReader;
 use Mediact\TestingSuite\Composer\Factory\ProcessFactory;
 use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
+use Mediact\TestingSuite\Composer\Installer\ConfigInstaller;
 use Mediact\TestingSuite\Composer\Installer\FilesInstaller;
 use Mediact\TestingSuite\Composer\Installer\GrumPhpInstaller;
 use Mediact\TestingSuite\Composer\Installer\PackagesInstaller;
@@ -35,4 +36,5 @@ return [
     new ArchiveExcludeInstaller($mappingResolver, $io),
     new PackagesInstaller($composer, $typeResolver, $io),
     new PipelinesInstaller($fileInstaller, $io, $processFactory),
+    new ConfigInstaller($configResolver, $io)
 ];
