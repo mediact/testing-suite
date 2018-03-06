@@ -31,7 +31,7 @@ class ConfigResolver
     /**
      * Resolve config.
      *
-     * @return string[]
+     * @return array
      */
     public function resolve(): array
     {
