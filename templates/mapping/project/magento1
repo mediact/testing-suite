@@ -1,3 +1,4 @@
 {magento1/,}phpcs.xml
 {magento1/,}package.json
 {magento1/,}.eslintrc.json
+{magento1/,}.eslintignore.json
