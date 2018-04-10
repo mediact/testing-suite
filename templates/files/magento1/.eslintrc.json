@@ -40,8 +40,7 @@
       2,
       {
         "args": "after-used",
-        "vars": "all",
-        "varsIgnorePattern": "^config$"
+        "vars": "all"
       }
     ],
     "no-with": 2,
