@@ -1,0 +1,39 @@
+{
+  "env": {
+    "browser": true,
+    "jquery": true,
+    "prototypejs": true
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "indent": [
+      "error",
+      4
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "func-call-spacing": [
+      "error",
+      "never"
+    ],
+    "func-style": [
+      2,
+      "expression"
+    ]
+  },
+  "globals": {
+    "Translator": true,
+    "Validation": true,
+    "Varien": true
+  }
+}
