@@ -74,6 +74,19 @@ Example to add basic authentication for repo.example.com:
 composer config --global http-basic.repo.example.com $YOUR_USER $YOUR_PASSWORD
 ```
 
+## ESLint
+Javascript linting for Magento 1 and Magento 2 projects is executed using 
+[ESLint](https://eslint.org/). Two files called `.eslintrc.json` and 
+`.eslintignore` are added to the root of the repository which contains the 
+coding standards and files excluded from analysis.
+
+A third file called `package.json` is added which contains the needed npm 
+modules. Run `npm install` after the installation in order to enable ESLint:
+
+```shell
+npm install
+```
+
 # Integration with PHPStorm
 
 When the testing suite is installed in a PHPStorm environment it automatically
@@ -109,3 +122,10 @@ Choose "Local" for the development environment and fill in the full path to
 
 After these adjustments the coding style and complexity will be validated
 while typing in PHPStorm.
+
+To enable ESLint open PHPStorm and go to 
+__Settings > Languages & Frameworks > Javascript > Code Quality Tools > ESLint__.
+
+Enable ESLint by checking `Enabled`. Then set the `Node interpreter` 
+to `Project` and `Configuration file` to `Automatic Search`.
+
