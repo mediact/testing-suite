@@ -2,4 +2,4 @@
 {magento2/,}phpstan.neon
 {magento2/,}package.json
 {magento2/,}.eslintrc.json
-{magento2/,}.eslintignore.json
+{magento2/,}.eslintignore
