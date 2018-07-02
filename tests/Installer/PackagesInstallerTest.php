@@ -88,24 +88,24 @@ class PackagesInstallerTest extends TestCase
             [
                 'magento1',
                 $this->createLinkMocks(['foo/bar']),
-                [['mediact/coding-standard-magento1']]
+                [['mediact/coding-standard-magento1'], ['mediact/dependency-guard']]
             ],
             [
                 'magento1',
                 $this->createLinkMocks(
                     ['foo/bar', 'mediact/coding-standard-magento1']
                 ),
-                null
+                [['mediact/dependency-guard']]
             ],
             [
                 'magento2',
                 $this->createLinkMocks(['foo/bar']),
-                [['mediact/coding-standard-magento2']]
+                [['mediact/coding-standard-magento2'], ['mediact/dependency-guard']]
             ],
             [
                 'default',
                 $this->createLinkMocks(['foo/bar']),
-                null
+                [['mediact/dependency-guard']]
             ],
             [
                 'unknown',

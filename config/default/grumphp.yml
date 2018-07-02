@@ -32,3 +32,29 @@ parameters:
       config_file: ./phpunit.xml
       metadata:
         priority: 200
+    dependency-guard:
+      metadata:
+        priority: 100
+
+services:
+  mediact.testing_suite.grumphp.dependency_guard.task:
+    class: Mediact\TestingSuite\Composer\GrumPhp\DependencyGuard
+    arguments:
+      - '@mediact.testing_suite.dependency_guard.composer'
+      - '@console.input'
+      - '@console.output'
+    tags:
+      - name: grumphp.task
+        config: dependency-guard
+
+  mediact.testing_suite.dependency_guard.composer.io:
+    class: Composer\IO\BufferIO
+
+  mediact.testing_suite.dependency_guard.composer.factory:
+    class: Composer\Factory
+
+  mediact.testing_suite.dependency_guard.composer:
+    class: Composer\Composer
+    factory: mediact.testing_suite.dependency_guard.composer.factory:createComposer
+    arguments:
+      - '@mediact.testing_suite.dependency_guard.composer.io'

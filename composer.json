@@ -33,7 +33,8 @@
     },
     "require-dev": {
         "composer/composer": "@stable",
-        "mikey179/vfsstream": "@stable"
+        "mikey179/vfsstream": "@stable",
+        "mediact/dependency-guard": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
