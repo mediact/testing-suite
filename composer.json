@@ -20,21 +20,21 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^7.1",
+        "composer-plugin-api": "^1.1",
+        "kint-php/kint": "~1.0 || ~2.0",
         "mediact/coding-standard": "~1.0 || ~2.0",
         "mediact/coding-standard-phpstorm": "~1.0",
-        "phpunit/phpunit": "~3.7 || ~4.0 || ~5.0 || ~6.0 || ~7.0",
-        "kint-php/kint": "~1.0 || ~2.0",
-        "phpstan/phpstan": "~0.1",
-        "composer-plugin-api": "^1.1",
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
-        "phpro/grumphp": "~0.1"
+        "mediact/dependency-guard": "^1.0",
+        "phpro/grumphp": "~0.1",
+        "phpstan/phpstan": "~0.1",
+        "phpunit/phpunit": "~3.7 || ~4.0 || ~5.0 || ~6.0 || ~7.0"
     },
     "require-dev": {
         "composer/composer": "@stable",
-        "mikey179/vfsstream": "@stable",
-        "mediact/dependency-guard": "@stable"
+        "mikey179/vfsstream": "@stable"
     },
     "bin": [
         "bin/mediact-testing-suite"
