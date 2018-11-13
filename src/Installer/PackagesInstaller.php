@@ -8,8 +8,6 @@ namespace Mediact\TestingSuite\Composer\Installer;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
-use Composer\Package\Link;
-use Composer\Semver\Comparator;
 use Mediact\Composer\DependencyInstaller\DependencyInstaller;
 use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 
@@ -29,33 +27,17 @@ class PackagesInstaller implements InstallerInterface
 
     /** @var array */
     private $mapping = [
-        'default' => [
-            [
-                'name' => 'mediact/dependency-guard',
-                'version' => '@stable',
-                'php' => '7.2.0'
-            ]
-        ],
+        'default' => [],
         'magento1' => [
             [
                 'name' => 'mediact/coding-standard-magento1',
                 'version' => '@stable'
-            ],
-            [
-                'name' => 'mediact/dependency-guard',
-                'version' => '@stable',
-                'php' => '7.2.0'
             ]
         ],
         'magento2' => [
             [
                 'name' => 'mediact/coding-standard-magento2',
                 'version' => '@stable'
-            ],
-            [
-                'name' => 'mediact/dependency-guard',
-                'version' => '@stable',
-                'php' => '7.2.0'
             ]
         ]
     ];
@@ -95,25 +77,7 @@ class PackagesInstaller implements InstallerInterface
             return;
         }
 
-        $rootPhpVersion = array_reduce(
-            $this->composer->getPackage()->getRequires(),
-            function (string $carry, Link $link): string {
-                return $link->getTarget() === 'php'
-                    ? $link->getPrettyConstraint()
-                    : $carry;
-            },
-            PHP_VERSION
-        );
-
         foreach ($this->mapping[$type] as $package) {
-            $requiredPhpVersion = $package['php'] ?? PHP_VERSION;
-
-            // Skip the package if the required PHP version is higher than the
-            // current PHP version as defined by the root package.
-            if (Comparator::compare($requiredPhpVersion, '>', $rootPhpVersion)) {
-                continue;
-            }
-
             if (!$this->isPackageRequired($package['name'])) {
                 $this->io->write(
                     sprintf('Requiring package %s', $package['name'])
