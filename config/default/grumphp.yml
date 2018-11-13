@@ -37,24 +37,37 @@ parameters:
         priority: 100
 
 services:
-  mediact.testing_suite.grumphp.dependency_guard.task:
-    class: Mediact\TestingSuite\Composer\GrumPhp\DependencyGuard
+  mediact.dependency_guard.exporter.factory:
+    class: Mediact\DependencyGuard\Composer\Command\Exporter\ViolationExporterFactory
+
+  mediact.dependency_guard.exporter:
+    class: Mediact\DependencyGuard\Exporter\ViolationExporterInterface
+    factory: 'mediact.dependency_guard.exporter.factory:create'
     arguments:
-      - '@mediact.testing_suite.dependency_guard.composer'
-      - '@console.input'
-      - '@console.output'
+    - '@console.input'
+    - '@console.output'
+
+  mediact.dependency_guard.factory:
+    class: Mediact\DependencyGuard\DependencyGuardFactory
+
+  mediact.dependency_guard.composer.io:
+    class: Composer\IO\BufferIO
+
+  mediact.dependency_guard.composer.factory:
+    class: Composer\Factory
+
+  mediact.dependency_guard.composer:
+    class: Composer\Composer
+    factory: mediact.dependency_guard.composer.factory:createComposer
+    arguments:
+      - '@mediact.dependency_guard.composer.io'
+
+  mediact.dependency_guard.grumphp.task:
+    class: Mediact\DependencyGuard\GrumPHP\DependencyGuard
+    arguments:
+      - '@mediact.dependency_guard.composer'
+      - '@mediact.dependency_guard.factory'
+      - '@mediact.dependency_guard.exporter'
     tags:
       - name: grumphp.task
         config: dependency-guard
-
-  mediact.testing_suite.dependency_guard.composer.io:
-    class: Composer\IO\BufferIO
-
-  mediact.testing_suite.dependency_guard.composer.factory:
-    class: Composer\Factory
-
-  mediact.testing_suite.dependency_guard.composer:
-    class: Composer\Composer
-    factory: mediact.testing_suite.dependency_guard.composer.factory:createComposer
-    arguments:
-      - '@mediact.testing_suite.dependency_guard.composer.io'
