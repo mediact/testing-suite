@@ -25,7 +25,7 @@ parameters:
       autoload_file: ~
       configuration: ./phpstan.neon
       level: 4
-      triggered_by: [php,phtml]
+      triggered_by: [php]
       metadata:
         priority: 400
     phpunit:
