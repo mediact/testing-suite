@@ -11,21 +11,21 @@ parameters:
         priority: 1000
     phpcs:
       standard: ./phpcs.xml
-      triggered_by: [php]
+      triggered_by: [php,phtml]
       metadata:
         priority: 800
     phpmd:
       exclude: []
       ruleset:
         - ./phpmd.xml
-      triggered_by: [php]
+      triggered_by: [php,phtml]
       metadata:
         priority: 600
     phpstan:
       autoload_file: ~
       configuration: ./phpstan.neon
       level: 4
-      triggered_by: [php]
+      triggered_by: [php,phtml]
       metadata:
         priority: 400
     phpunit:
