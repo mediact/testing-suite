@@ -1,15 +1,3 @@
-# Do not commit IDE files.
-/.settings
-/.buildpath
-/.project
-/nbproject
-/.idea
-
-# Do not commit OS tmp files.
-.DS_Store
-.DS_Store?
-Thumbs.db
-
 # Do not commit project install files.
 /vendor
 /composer.lock
