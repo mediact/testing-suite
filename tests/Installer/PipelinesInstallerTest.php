@@ -9,6 +9,7 @@ namespace Mediact\TestingSuite\Composer\Tests\Installer;
 use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
 use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
+use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use PHPUnit\Framework\TestCase;
@@ -42,6 +43,7 @@ class PipelinesInstallerTest extends TestCase
         $io             = $this->createMock(IOInterface::class);
         $processFactory = $this->createMock(ProcessFactoryInterface::class);
         $process        = $this->createMock(Process::class);
+        $typeResolver   = $this->createMock(ProjectTypeResolver::class);
         $filesystem     = $this->createFilesystem($files);
 
         $process
@@ -60,18 +62,28 @@ class PipelinesInstallerTest extends TestCase
 
         if ($expectedInstall) {
             $fileInstaller
-                ->expects(self::once())
+                ->expects(self::any())
                 ->method('installFile');
+
+            $typeResolver
+                ->expects(self::once())
+                ->method('resolve')
+                ->willReturn('default');
         } else {
             $fileInstaller
                 ->expects(self::never())
                 ->method('installFile');
+
+            $typeResolver
+                ->expects(self::never())
+                ->method('resolve');
         }
 
         $installer = new PipelinesInstaller(
             $fileInstaller,
             $io,
             $processFactory,
+            $typeResolver,
             $filesystem->url()
         );
 

@@ -9,6 +9,8 @@ namespace Mediact\TestingSuite\Composer\Installer;
 use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller;
 use Mediact\FileMapping\UnixFileMapping;
+use Mediact\FileMapping\UnixFileMappingReader;
+use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
 
 class PipelinesInstaller implements InstallerInterface
@@ -21,6 +23,9 @@ class PipelinesInstaller implements InstallerInterface
 
     /** @var ProcessFactoryInterface */
     private $processFactory;
+
+    /** @var ProjectTypeResolver */
+    private $typeResolver;
 
     /** @var string */
     private $destination;
@@ -37,6 +42,7 @@ class PipelinesInstaller implements InstallerInterface
      * @param FileInstaller           $fileInstaller
      * @param IOInterface             $io
      * @param ProcessFactoryInterface $processFactory
+     * @param ProjectTypeResolver     $typeResolver
      * @param string|null             $destination
      * @param string|null             $pattern
      * @param string|null             $filename
@@ -45,6 +51,7 @@ class PipelinesInstaller implements InstallerInterface
         FileInstaller $fileInstaller,
         IOInterface $io,
         ProcessFactoryInterface $processFactory,
+        ProjectTypeResolver $typeResolver,
         string $destination = null,
         string $pattern = null,
         string $filename = null
@@ -52,6 +59,7 @@ class PipelinesInstaller implements InstallerInterface
         $this->fileInstaller  = $fileInstaller;
         $this->io             = $io;
         $this->processFactory = $processFactory;
+        $this->typeResolver   = $typeResolver;
         $this->destination    = $destination ?? getcwd();
         $this->pattern        = $pattern ?? $this->pattern;
         $this->filename       = $filename ?? $this->filename;
@@ -70,19 +78,30 @@ class PipelinesInstaller implements InstallerInterface
             return;
         }
 
-        $mapping = new UnixFileMapping(
-            __DIR__ . '/../../templates/files/pipelines',
-            $this->destination,
-            $this->filename
-        );
 
-        $this->fileInstaller->installFile($mapping);
-        $this->io->write(
+        $files = [
+            __DIR__ . '/../../templates/mapping/files',
             sprintf(
-                '<info>Installed:</info> %s',
-                $mapping->getRelativeDestination()
+                __DIR__ . '/../../templates/mapping/pipelines/%s',
+                $this->typeResolver->resolve()
             )
+        ];
+
+        $reader = new UnixFileMappingReader(
+            __DIR__ . '/../../templates/files',
+            getcwd(),
+            ...$files
         );
+        
+        foreach ($reader as $mapping) {
+            $this->fileInstaller->installFile($mapping);
+            $this->io->write(
+                sprintf(
+                    '<info>Installed:</info> %s',
+                    $mapping->getRelativeDestination()
+                )
+            );
+        }
     }
 
     /**
