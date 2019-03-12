@@ -13,9 +13,9 @@ use Mediact\FileMapping\FileMappingReaderInterface;
 use Mediact\TestingSuite\Composer\MappingResolver;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
-use PHPUnit_Framework_MockObject_MockObject;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller
@@ -124,7 +124,7 @@ class ArchiveExcludeInstallerTest extends TestCase
      */
     private function createReaderMock(array $files): FileMappingReaderInterface
     {
-        /** @var FileMappingReaderInterface|PHPUnit_Framework_MockObject_MockObject $mock */
+        /** @var FileMappingReaderInterface|MockObject $mock */
         $mock = $this->createMock(FileMappingReaderInterface::class);
 
         $valids   = array_fill(0, count($files), true);
@@ -132,7 +132,7 @@ class ArchiveExcludeInstallerTest extends TestCase
 
         $mappings = array_map(
             function (string $file): FileMappingInterface {
-                /** @var FileMappingInterface|PHPUnit_Framework_MockObject_MockObject $mapping */
+                /** @var FileMappingInterface|MockObject $mapping */
                 $mapping = $this->createMock(FileMappingInterface::class);
                 $mapping
                     ->expects(self::any())

@@ -35,6 +35,6 @@ return [
     new GrumPhpInstaller($io),
     new ArchiveExcludeInstaller($mappingResolver, $io),
     new PackagesInstaller($composer, $typeResolver, $io),
-    new PipelinesInstaller($fileInstaller, $io, $processFactory),
+    new PipelinesInstaller($fileInstaller, $io, $processFactory, $typeResolver),
     new ConfigInstaller($configResolver, $io)
 ];
