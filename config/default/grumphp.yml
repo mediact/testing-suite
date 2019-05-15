@@ -8,36 +8,60 @@ parameters:
     composer:
       strict: true
       metadata:
-        priority: 1000
+        priority: 1400
+    jsonlint:
+      detect_key_conflicts: true
+      metadata:
+        priority: 1200
+    xmllint:
+      load_from_net: true
+      x_include: true
+      dtd_validation: true
+      scheme_validation: true
+      triggered_by: [xml]
+      ignore_patterns:
+        # Uses an incomplete definition, which conflicts when <exclude-pattern>
+        # is defined.
+        - /^phpcs.xml$/
+      metadata:
+        priority: 1200
+    yamllint:
+      ignore_patterns:
+        - /^vendor\//
+      parse_constant: true
+      metadata:
+        priority: 1200
     phpcs:
       standard: ./phpcs.xml
       triggered_by: [php]
       metadata:
-        priority: 800
+        priority: 1000
     phpmd:
       exclude: []
       ruleset:
         - ./phpmd.xml
       triggered_by: [php]
       metadata:
-        priority: 600
+        priority: 800
     phpstan:
       autoload_file: ~
       configuration: ./phpstan.neon
       level: 4
       triggered_by: [php]
       metadata:
-        priority: 400
+        priority: 600
     phpunit:
       config_file: ./phpunit.xml
       metadata:
-        priority: 200
+        priority: 400
     securitychecker:
       lockfile: ./composer.lock
       format: ~
       end_point: ~
       timeout: ~
       run_always: true
+      metadata:
+        priority: 200
 #    dependency-guard:
 #      metadata:
 #        priority: 100
