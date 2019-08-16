@@ -1,0 +1,15 @@
+imports:
+  - resource: 'vendor/mediact/testing-suite/config/default/grumphp.yml'
+
+parameters:
+  tasks:
+    composer: '%task_composer%'
+    jsonlint: '%task_jsonlint%'
+    xmllint: '%task_xmllint%'
+    yamllint: '%task_yamllint%'
+    phpcs: '%task_phpcs%'
+    phpmd: '%task_phpmd%'
+    phpstan: '%task_phpstan%'
+    phpunit: '%task_phpunit%'
+    securitychecker: '%task_securitychecker%'
+#    dependency-guard: '%task_dependency-guard%'

@@ -11,6 +11,9 @@ use Composer\IO\IOInterface;
 use Mediact\Composer\DependencyInstaller\DependencyInstaller;
 use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class PackagesInstaller implements InstallerInterface
 {
     /** @var DependencyInstaller */

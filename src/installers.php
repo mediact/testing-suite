@@ -32,7 +32,6 @@ $processFactory  = new ProcessFactory();
 
 return [
     new FilesInstaller($mappingResolver, $fileInstaller, $io),
-    new GrumPhpInstaller($io),
     new ArchiveExcludeInstaller($mappingResolver, $io),
     new PackagesInstaller($composer, $typeResolver, $io),
     new PipelinesInstaller($fileInstaller, $io, $processFactory, $typeResolver),

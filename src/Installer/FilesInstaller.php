@@ -10,6 +10,9 @@ use Composer\IO\IOInterface;
 use Mediact\Composer\FileInstaller as ComposerFileInstaller;
 use Mediact\TestingSuite\Composer\MappingResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class FilesInstaller implements InstallerInterface
 {
     /** @var MappingResolver */

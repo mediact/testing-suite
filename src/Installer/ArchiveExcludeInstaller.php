@@ -12,6 +12,10 @@ use Composer\Json\JsonFile;
 use Mediact\FileMapping\FileMappingInterface;
 use Mediact\TestingSuite\Composer\MappingResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ArchiveExcludeInstaller implements InstallerInterface
 {
     /** @var JsonFile */

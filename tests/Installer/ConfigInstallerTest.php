@@ -14,6 +14,7 @@ use Mediact\TestingSuite\Composer\Installer\ConfigInstaller;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\ConfigInstaller
+ * @SuppressWarnings(PHPMD)
  */
 class ConfigInstallerTest extends TestCase
 {

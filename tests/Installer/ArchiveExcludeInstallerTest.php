@@ -19,6 +19,7 @@ use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller
+ * @SuppressWarnings(PHPMD)
  */
 class ArchiveExcludeInstallerTest extends TestCase
 {

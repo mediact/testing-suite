@@ -8,6 +8,9 @@ use Composer\IO\IOInterface;
 use Composer\Plugin\PluginInterface;
 use Mediact\TestingSuite\Composer\Installer\InstallerInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class Plugin implements PluginInterface, EventSubscriberInterface
 {
     /** @var InstallerInterface[] */

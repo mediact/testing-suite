@@ -4,65 +4,88 @@ parameters:
   ascii:
     failed: ~
     succeeded: ~
+    
+  # Default settings for testing suite tasks
+  task_composer:
+    strict: true
+    metadata:
+      priority: 1400
+
+  task_jsonlint:
+    detect_key_conflicts: true
+    metadata:
+      priority: 1200
+
+  task_xmllint:
+    load_from_net: true
+    x_include: true
+    dtd_validation: true
+    scheme_validation: true
+    triggered_by: [xml]
+    ignore_patterns:
+      # Uses an incomplete definition, which conflicts when <exclude-pattern>
+      # is defined.
+      - /^phpcs.xml$/
+    metadata:
+      priority: 1200
+
+  task_yamllint:
+    parse_constant: true
+    metadata:
+      priority: 1200
+
+  task_phpcs:
+    standard: ./phpcs.xml
+    triggered_by: [php]
+    metadata:
+      priority: 1000
+
+  task_phpmd:
+    exclude: []
+    ruleset:
+      - ./phpmd.xml
+    triggered_by: [php]
+    metadata:
+      priority: 800
+
+  task_phpstan:
+    autoload_file: ~
+    configuration: ./phpstan.neon
+    level: 4
+    triggered_by: [php]
+    metadata:
+      priority: 600
+
+  task_phpunit:
+    config_file: ./phpunit.xml
+    metadata:
+      priority: 400
+
+  task_securitychecker:
+    lockfile: ./composer.lock
+    format: ~
+    end_point: ~
+    timeout: ~
+    run_always: true
+    metadata:
+      priority: 200
+
+  task_dependency-guard:
+    metadata:
+      priority: 100
+      
+  # Default tasks for testing suite
   tasks:
-    composer:
-      strict: true
-      metadata:
-        priority: 1400
-    jsonlint:
-      detect_key_conflicts: true
-      metadata:
-        priority: 1200
-    xmllint:
-      load_from_net: true
-      x_include: true
-      dtd_validation: true
-      scheme_validation: true
-      triggered_by: [xml]
-      ignore_patterns:
-        # Uses an incomplete definition, which conflicts when <exclude-pattern>
-        # is defined.
-        - /^phpcs.xml$/
-      metadata:
-        priority: 1200
-    yamllint:
-      parse_constant: true
-      metadata:
-        priority: 1200
-    phpcs:
-      standard: ./phpcs.xml
-      triggered_by: [php]
-      metadata:
-        priority: 1000
-    phpmd:
-      exclude: []
-      ruleset:
-        - ./phpmd.xml
-      triggered_by: [php]
-      metadata:
-        priority: 800
-    phpstan:
-      autoload_file: ~
-      configuration: ./phpstan.neon
-      level: 4
-      triggered_by: [php]
-      metadata:
-        priority: 600
-    phpunit:
-      config_file: ./phpunit.xml
-      metadata:
-        priority: 400
-    securitychecker:
-      lockfile: ./composer.lock
-      format: ~
-      end_point: ~
-      timeout: ~
-      run_always: true
-      metadata:
-        priority: 200
-#    dependency-guard:
-#      metadata:
-#        priority: 100
+    composer: '%task_composer%'
+    jsonlint: '%task_jsonlint%'
+    xmllint: '%task_xmllint%'
+    yamllint: '%task_yamllint%'
+    phpcs: '%task_phpcs%'
+    phpmd: '%task_phpmd%'
+    phpstan: '%task_phpstan%'
+    phpunit: '%task_phpunit%'
+    securitychecker: '%task_securitychecker%'
+#    dependency-guard: '%task_dependency-guard%'
 
 #services:
 #  mediact.dependency_guard.exporter.factory:

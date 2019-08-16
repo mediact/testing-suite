@@ -17,6 +17,7 @@ use Mediact\TestingSuite\Composer\Installer\PackagesInstaller;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\PackagesInstaller
+ * @SuppressWarnings(PHPMD)
  */
 class PackagesInstallerTest extends TestCase
 {
