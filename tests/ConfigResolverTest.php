@@ -13,6 +13,7 @@ use Mediact\TestingSuite\Composer\ConfigResolver;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\ConfigResolver
+ * @SuppressWarnings(PHPMD)
  */
 class ConfigResolverTest extends TestCase
 {

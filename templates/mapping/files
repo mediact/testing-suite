@@ -1,4 +1,5 @@
-{default/,}phpunit{_dist,}.xml
+{default/,}grumphp.yml
+{default/dot,.}gitignore
 {default/,}phpmd.xml
 {default/,}phpstan.neon
-{default/dot,.}gitignore
+{default/,}phpunit{_dist,}.xml

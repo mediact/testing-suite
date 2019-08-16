@@ -15,6 +15,7 @@ use ReflectionProperty;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Plugin
+ * @SuppressWarnings(PHPMD)
  */
 class PluginTest extends TestCase
 {

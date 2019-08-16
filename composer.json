@@ -42,7 +42,7 @@
     ],
     "extra": {
         "grumphp": {
-            "config-default-path": "config/default/grumphp.yml"
+            "config-default-path": "grumphp.yml"
         },
         "class": "Mediact\\TestingSuite\\Composer\\Plugin"
     },

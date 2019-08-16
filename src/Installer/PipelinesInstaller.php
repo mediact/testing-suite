@@ -13,6 +13,9 @@ use Mediact\FileMapping\UnixFileMappingReader;
 use Mediact\TestingSuite\Composer\ProjectTypeResolver;
 use Mediact\TestingSuite\Composer\Factory\ProcessFactoryInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ */
 class PipelinesInstaller implements InstallerInterface
 {
     /** @var FileInstaller */

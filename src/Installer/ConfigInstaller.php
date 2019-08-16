@@ -11,6 +11,10 @@ use Composer\IO\IOInterface;
 use Composer\Json\JsonFile;
 use Mediact\TestingSuite\Composer\ConfigResolver;
 
+/**
+ * @SuppressWarnings(PHPMD.ShortVariable)
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class ConfigInstaller implements InstallerInterface
 {
     /** @var JsonFile */

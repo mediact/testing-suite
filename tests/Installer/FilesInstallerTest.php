@@ -19,6 +19,7 @@ use Mediact\TestingSuite\Composer\Installer\FilesInstaller;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\FilesInstaller
+ * @SuppressWarnings(PHPMD)
  */
 class FilesInstallerTest extends TestCase
 {

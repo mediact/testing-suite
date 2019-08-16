@@ -19,6 +19,7 @@ use Symfony\Component\Process\ProcessBuilder;
 
 /**
  * @coversDefaultClass \Mediact\TestingSuite\Composer\Installer\PipelinesInstaller
+ * @SuppressWarnings(PHPMD)
  */
 class PipelinesInstallerTest extends TestCase
 {
