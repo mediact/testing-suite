@@ -10,7 +10,6 @@ use Mediact\TestingSuite\Composer\Factory\ProcessFactory;
 use Mediact\TestingSuite\Composer\Installer\ArchiveExcludeInstaller;
 use Mediact\TestingSuite\Composer\Installer\ConfigInstaller;
 use Mediact\TestingSuite\Composer\Installer\FilesInstaller;
-use Mediact\TestingSuite\Composer\Installer\GrumPhpInstaller;
 use Mediact\TestingSuite\Composer\Installer\PackagesInstaller;
 use Mediact\TestingSuite\Composer\Installer\PipelinesInstaller;
 use Mediact\TestingSuite\Composer\MappingResolver;
