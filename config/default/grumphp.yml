@@ -4,88 +4,122 @@ parameters:
   ascii:
     failed: ~
     succeeded: ~
-    
+
   # Default settings for testing suite tasks
-  task_composer:
-    strict: true
-    metadata:
-      priority: 1400
+  composer.strict: true
+  composer.metadata.priority: 1400
 
-  task_jsonlint:
-    detect_key_conflicts: true
-    metadata:
-      priority: 1200
+  jsonlint.detect_key_conflicts: true
+  jsonlint.metadata.priority: 1200
 
-  task_xmllint:
-    load_from_net: true
-    x_include: true
-    dtd_validation: true
-    scheme_validation: true
-    triggered_by: [xml]
-    ignore_patterns:
-      # Uses an incomplete definition, which conflicts when <exclude-pattern>
-      # is defined.
-      - /^phpcs.xml$/
-    metadata:
-      priority: 1200
+  xmllint.load_from_net: true
+  xmllint.x_include: true
+  xmllint.dtd_validation: true
+  xmllint.scheme_validation: true
+  xmllint.triggered_by: [xml]
+  xmllint.ignore_patterns:
+    # Uses an incomplete definition, which conflicts when <exclude-pattern>
+    # is defined.
+    - /^phpcs.xml$/
+    - /^phpmd.xml$/
+  xmllint.metadata.priority: 1200
 
-  task_yamllint:
-    parse_constant: true
-    metadata:
-      priority: 1200
+  yamllint.parse_constant: true
+  yamllint.metadata.priority: 1200
 
-  task_phpcs:
-    standard: ./phpcs.xml
-    triggered_by: [php]
-    metadata:
-      priority: 1000
+  phpcs.standard: ./phpcs.xml
+  phpcs.triggered_by: [php]
+  phpcs.metadata.priority: 1000
 
-  task_phpmd:
-    exclude: []
-    ruleset:
-      - ./phpmd.xml
-    triggered_by: [php]
-    metadata:
-      priority: 800
+  phpmd.exclude: []
+  phpmd.ruleset:
+    - ./phpmd.xml
+  phpmd.triggered_by: [php]
+  phpmd.metadata.priority: 800
 
-  task_phpstan:
-    autoload_file: ~
-    configuration: ./phpstan.neon
-    level: 4
-    triggered_by: [php]
-    metadata:
-      priority: 600
+  phpstan.autoload_file: ~
+  phpstan.configuration: ./phpstan.neon
+  phpstan.level: 4
+  phpstan.triggered_by: [php]
+  phpstan.metadata.priority: 600
 
-  task_phpunit:
-    config_file: ./phpunit.xml
-    metadata:
-      priority: 400
+  phpunit.config_file: ./phpunit.xml
+  phpunit.metadata.priority: 400
 
-  task_securitychecker:
-    lockfile: ./composer.lock
-    format: ~
-    end_point: ~
-    timeout: ~
-    run_always: true
-    metadata:
-      priority: 200
+  securitychecker.lockfile: ./composer.lock
+  securitychecker.format: ~
+  securitychecker.end_point: ~
+  securitychecker.timeout: ~
+  securitychecker.run_always: true
+  securitychecker.metadata.priority: 200
 
-  task_dependency-guard:
-    metadata:
-      priority: 100
-      
+  dependency-guard.metadata.priority: 100
+
   # Default tasks for testing suite
   tasks:
-    composer: '%task_composer%'
-    jsonlint: '%task_jsonlint%'
-    xmllint: '%task_xmllint%'
-    yamllint: '%task_yamllint%'
-    phpcs: '%task_phpcs%'
-    phpmd: '%task_phpmd%'
-    phpstan: '%task_phpstan%'
-    phpunit: '%task_phpunit%'
-    securitychecker: '%task_securitychecker%'
-#    dependency-guard: '%task_dependency-guard%'
+    composer:
+      strict: '%composer.strict%'
+      metadata:
+        priority: '%composer.metadata.priority%'
+
+    jsonlint:
+      detect_key_conflicts: '%jsonlint.detect_key_conflicts%'
+      metadata:
+        priority: '%jsonlint.metadata.priority%'
+
+    xmllint:
+      load_from_net: '%xmllint.load_from_net%'
+      x_include: '%xmllint.x_include%'
+      dtd_validation: '%xmllint.dtd_validation%'
+      scheme_validation: '%xmllint.scheme_validation%'
+      triggered_by: '%xmllint.triggered_by%'
+      ignore_patterns: '%xmllint.ignore_patterns%'
+      metadata:
+        priority: '%xmllint.metadata.priority%'
+
+    yamllint:
+      parse_constant: '%yamllint.parse_constant%'
+      metadata:
+        priority: '%yamllint.metadata.priority%'
+
+    phpcs:
+      standard: '%phpcs.standard%'
+      triggered_by: '%phpcs.triggered_by%'
+      metadata:
+        priority: '%phpcs.metadata.priority%'
+
+    phpmd:
+      exclude: '%phpmd.exclude%'
+      ruleset: '%phpmd.ruleset%'
+      triggered_by: '%phpmd.triggered_by%'
+      metadata:
+        priority: '%phpmd.metadata.priority%'
+
+    phpstan:
+      autoload_file: '%phpstan.autoload_file%'
+      configuration: '%phpstan.configuration%'
+      level: '%phpstan.level%'
+      triggered_by: '%phpstan.triggered_by%'
+      metadata:
+        priority: '%phpstan.metadata.priority%'
+
+    phpunit:
+      config_file: '%phpunit.config_file%'
+      metadata:
+        priority: '%phpunit.metadata.priority%'
+
+    securitychecker:
+      lockfile: '%securitychecker.lockfile%'
+      format: '%securitychecker.format%'
+      end_point: '%securitychecker.end_point%'
+      timeout: '%securitychecker.timeout%'
+      run_always: '%securitychecker.run_always%'
+      metadata:
+        priority: '%securitychecker.metadata.priority%'
+
+#    dependency-guard:
+#      metadata:
+#        priority: '%dependency-guard.metadata.priority%'
 
 #services:
 #  mediact.dependency_guard.exporter.factory:
