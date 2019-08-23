@@ -24,7 +24,7 @@
         "composer-plugin-api": "^1.1",
         "kint-php/kint": "~1.0 || ~2.0 || ~3.0",
         "mediact/coding-standard": "~1.0 || ~2.0",
-        "mediact/coding-standard-phpstorm": "~1.0",
+        "mediact/coding-standard-phpstorm": "@stable",
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
         "mediact/composer-unclog-plugin": "^1.0",
