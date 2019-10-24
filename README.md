@@ -40,6 +40,28 @@ Depending on the composer type of the project an other standard will be used:
 - `magento-module`: [MediaCT Coding Standard Magento1](https://github.com/mediact/coding-standard-magento1)
 - `magento2-module`: [MediaCT Coding Standard Magento2](https://github.com/mediact/coding-standard-magento2)
 
+### Overriding the type
+
+The type for a project can be overridden in the composer.json `config` node by 
+adding `testing-suite-type` to the configuration.
+This will allow the use of standards for a different type.
+The allowed values for this node are:
+- magento1
+- magento2
+- default
+
+The configurations looks like the following:
+```json
+{
+  "config": {
+    "testing-suite-type": "magento2"
+  }
+}
+```
+
+This can be helpful when development is done in the `app/code` folder and force 
+the testing suite to automatically select the correct standards.
+
 ## Coding complexity validation (PHPMD)
 
 The complexity of the code is validated using PHPMD. A file called `phpmd.xml`

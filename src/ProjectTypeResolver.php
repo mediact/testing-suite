@@ -13,6 +13,11 @@ use Composer\Composer;
  */
 class ProjectTypeResolver
 {
+    /**
+     * The key from the composer configuration which overwrites the type.
+     */
+    const COMPOSER_CONFIG_TYPE_KEY = 'testing-suite-type';
+
     /** @var Composer */
     private $composer;
 
@@ -41,7 +46,13 @@ class ProjectTypeResolver
      */
     public function resolve(): string
     {
+        $config = $this->composer->getConfig();
+        if ($config->has(static::COMPOSER_CONFIG_TYPE_KEY)) {
+            return $config->get(static::COMPOSER_CONFIG_TYPE_KEY);
+        }
+
         $packageType = $this->composer->getPackage()->getType();
+
         return array_key_exists($packageType, $this->mapping)
             ? $this->mapping[$packageType]
             : 'default';
