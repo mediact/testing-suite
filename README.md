@@ -54,7 +54,9 @@ The configurations looks like the following:
 ```json
 {
   "config": {
-    "testing-suite-type": "magento2"
+    "mediact-testing-suite": {
+      "type": "magento2"
+    }
   }
 }
 ```

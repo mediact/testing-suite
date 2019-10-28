@@ -47,7 +47,7 @@ class ProjectTypeResolverTest extends TestCase
         $config
             ->expects(self::once())
             ->method('has')
-            ->with(ProjectTypeResolver::COMPOSER_CONFIG_TYPE_KEY)
+            ->with(ProjectTypeResolver::COMPOSER_CONFIG_KEY)
             ->willReturn(false);
 
         $package
@@ -82,14 +82,14 @@ class ProjectTypeResolverTest extends TestCase
         $config
             ->expects(self::once())
             ->method('has')
-            ->with(ProjectTypeResolver::COMPOSER_CONFIG_TYPE_KEY)
+            ->with(ProjectTypeResolver::COMPOSER_CONFIG_KEY)
             ->willReturn(true);
 
         $config
             ->expects(self::once())
             ->method('get')
-            ->with(ProjectTypeResolver::COMPOSER_CONFIG_TYPE_KEY)
-            ->willReturn('magento2');
+            ->with(ProjectTypeResolver::COMPOSER_CONFIG_KEY)
+            ->willReturn(['type' => 'magento2']);
 
         $decider = new ProjectTypeResolver($composer);
         $this->assertEquals('magento2', $decider->resolve());

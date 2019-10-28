@@ -14,9 +14,14 @@ use Composer\Composer;
 class ProjectTypeResolver
 {
     /**
-     * The key from the composer configuration which overwrites the type.
+     * The key from the composer configuration which contains other configuration.
      */
-    const COMPOSER_CONFIG_TYPE_KEY = 'testing-suite-type';
+    const COMPOSER_CONFIG_KEY = 'mediact-testing-suite';
+
+    /**
+     * The key in the configuration, which determines the overwrite for the type.
+     */
+    const COMPOSER_CONFIG_TYPE_KEY = 'type';
 
     /** @var Composer */
     private $composer;
@@ -47,8 +52,11 @@ class ProjectTypeResolver
     public function resolve(): string
     {
         $config = $this->composer->getConfig();
-        if ($config->has(static::COMPOSER_CONFIG_TYPE_KEY)) {
-            return $config->get(static::COMPOSER_CONFIG_TYPE_KEY);
+        if ($config->has(static::COMPOSER_CONFIG_KEY)) {
+            $configNode = $config->get(static::COMPOSER_CONFIG_KEY);
+            if (isset($configNode[static::COMPOSER_CONFIG_TYPE_KEY])) {
+                return $configNode[static::COMPOSER_CONFIG_TYPE_KEY];
+            }
         }
 
         $packageType = $this->composer->getPackage()->getType();
