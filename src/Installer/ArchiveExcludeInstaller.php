@@ -33,8 +33,10 @@ class ArchiveExcludeInstaller implements InstallerInterface
     /** @var array */
     private $defaults = [
         '/bitbucket-pipelines.yml',
+        '/docker-compose.yml',
         '/examples',
         '/example',
+        '/.env.dev',
         '/.gitattributes',
         '/.gitignore',
         '/tests'
