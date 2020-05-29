@@ -19,6 +19,6 @@ class ProcessFactory implements ProcessFactoryInterface
      */
     public function create(string $commandLine): Process
     {
-        return new Process($commandLine);
+        return new Process([$commandLine]);
     }
 }
