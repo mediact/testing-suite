@@ -28,7 +28,7 @@
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
         "mediact/composer-unclog-plugin": "^1.0",
-        "phpro/grumphp": "~0.1, !=0.18.0",
+        "phpro/grumphp": "~0.1",
         "phpstan/phpstan": "~0.1",
         "phpunit/phpunit": "~3.7 || ~4.0 || ~5.0 || ~6.0 || ~7.0 || ~8.0",
         "sensiolabs/security-checker": "^5.0",
