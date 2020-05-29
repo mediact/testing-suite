@@ -11,6 +11,9 @@ namespace Mediact\TestingSuite\Composer\GrumPHP;
 use GrumPHP\Extension\ExtensionInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
+/**
+ * @codeCoverageIgnore
+ */
 class ParameterFixExtension implements ExtensionInterface
 {
     /**
