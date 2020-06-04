@@ -1,1 +1,2 @@
 {default/,}phpcs.xml
+{default/,}phpmd.xml
