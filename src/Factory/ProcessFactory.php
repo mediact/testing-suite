@@ -19,6 +19,8 @@ class ProcessFactory implements ProcessFactoryInterface
      */
     public function create(string $commandLine): Process
     {
-        return new Process([$commandLine]);
+        return method_exists(Process::class, 'fromShellCommandline')
+            ? Process::fromShellCommandline($commandLine)
+            : new Process($commandLine);
     }
 }
