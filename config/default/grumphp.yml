@@ -1,10 +1,8 @@
 parameters:
   # Default settings for testing suite tasks
   composer.strict: true
-  composer.metadata.priority: 1400
 
   jsonlint.detect_key_conflicts: true
-  jsonlint.metadata.priority: 1200
 
   xmllint.load_from_net: true
   xmllint.x_include: true
@@ -18,38 +16,29 @@ parameters:
     - /^phpmd.xml$/
     - /^phpunit.xml$/
     - /^pdepend.xml$/
-  xmllint.metadata.priority: 1200
 
   yamllint.parse_constant: true
-  yamllint.metadata.priority: 1200
 
   phpcs.standard: ./phpcs.xml
   phpcs.triggered_by: [php]
-  phpcs.metadata.priority: 1000
 
   phpmd.exclude: []
   phpmd.ruleset:
     - ./phpmd.xml
   phpmd.triggered_by: [php]
-  phpmd.metadata.priority: 800
 
   phpstan.autoload_file: ~
   phpstan.configuration: ./phpstan.neon
   phpstan.level: 4
   phpstan.triggered_by: [php]
-  phpstan.metadata.priority: 600
 
   phpunit.config_file: ./phpunit.xml
-  phpunit.metadata.priority: 400
 
   securitychecker.lockfile: ./composer.lock
   securitychecker.format: ~
   securitychecker.end_point: ~
   securitychecker.timeout: ~
   securitychecker.run_always: true
-  securitychecker.metadata.priority: 200
-
-  dependency-guard.metadata.priority: 100
 
 grumphp:
   extensions:
@@ -63,13 +52,9 @@ grumphp:
   tasks:
     composer:
       strict: '%composer.strict%'
-      metadata:
-        priority: '%composer.metadata.priority%'
 
     jsonlint:
       detect_key_conflicts: '%jsonlint.detect_key_conflicts%'
-      metadata:
-        priority: '%jsonlint.metadata.priority%'
 
     xmllint:
       load_from_net: '%xmllint.load_from_net%'
@@ -78,39 +63,27 @@ grumphp:
       scheme_validation: '%xmllint.scheme_validation%'
       triggered_by: '%xmllint.triggered_by%'
       ignore_patterns: '%xmllint.ignore_patterns%'
-      metadata:
-        priority: '%xmllint.metadata.priority%'
 
     yamllint:
       parse_constant: '%yamllint.parse_constant%'
-      metadata:
-        priority: '%yamllint.metadata.priority%'
 
     phpcs:
       standard: '%phpcs.standard%'
       triggered_by: '%phpcs.triggered_by%'
-      metadata:
-        priority: '%phpcs.metadata.priority%'
 
     phpmd:
       exclude: '%phpmd.exclude%'
       ruleset: '%phpmd.ruleset%'
       triggered_by: '%phpmd.triggered_by%'
-      metadata:
-        priority: '%phpmd.metadata.priority%'
 
     phpstan:
       autoload_file: '%phpstan.autoload_file%'
       configuration: '%phpstan.configuration%'
       level: '%phpstan.level%'
       triggered_by: '%phpstan.triggered_by%'
-      metadata:
-        priority: '%phpstan.metadata.priority%'
 
     phpunit:
       config_file: '%phpunit.config_file%'
-      metadata:
-        priority: '%phpunit.metadata.priority%'
 
     securitychecker:
       lockfile: '%securitychecker.lockfile%'
@@ -118,5 +91,3 @@ grumphp:
       end_point: '%securitychecker.end_point%'
       timeout: '%securitychecker.timeout%'
       run_always: '%securitychecker.run_always%'
-      metadata:
-        priority: '%securitychecker.metadata.priority%'
