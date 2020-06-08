@@ -1,4 +1,5 @@
 {magento2/,}phpcs.xml
+{magento2/,}phpmd.xml
 {magento2/,}phpstan.neon
 {magento2/,}package.json
 {magento2/,}.eslintrc.json
