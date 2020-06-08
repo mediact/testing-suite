@@ -1,13 +1,4 @@
 parameters:
-  extensions:
-    - Mediact\TestingSuite\Composer\GrumPHP\ParameterFixExtension
-
-  git_dir: .
-  bin_dir: vendor/bin
-  ascii:
-    failed: ~
-    succeeded: ~
-
   # Default settings for testing suite tasks
   composer.strict: true
   composer.metadata.priority: 1400
@@ -25,6 +16,8 @@ parameters:
     # is defined.
     - /^phpcs.xml$/
     - /^phpmd.xml$/
+    - /^phpunit.xml$/
+    - /^pdepend.xml$/
   xmllint.metadata.priority: 1200
 
   yamllint.parse_constant: true
@@ -57,6 +50,14 @@ parameters:
   securitychecker.metadata.priority: 200
 
   dependency-guard.metadata.priority: 100
+
+grumphp:
+  extensions:
+    - Mediact\TestingSuite\Composer\GrumPHP\ParameterFixExtension
+
+  ascii:
+    failed: ~
+    succeeded: ~
 
   # Default tasks for testing suite
   tasks:
