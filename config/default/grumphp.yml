@@ -48,6 +48,9 @@ grumphp:
     failed: ~
     succeeded: ~
 
+  parallel:
+    enabled: false
+
   # Default tasks for testing suite
   tasks:
     composer:
