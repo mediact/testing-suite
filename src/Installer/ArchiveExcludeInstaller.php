@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright MediaCT. All rights reserved.
  * https://www.mediact.nl
@@ -97,7 +98,8 @@ class ArchiveExcludeInstaller implements InstallerInterface
         );
 
         foreach ($files as $file) {
-            if (!in_array($file, $excluded)
+            if (
+                !in_array($file, $excluded)
                 && file_exists($this->destination . $file)
             ) {
                 $excluded[] = $file;

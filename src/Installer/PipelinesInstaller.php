@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright MediaCT. All rights reserved.
  * https://www.mediact.nl
@@ -75,7 +76,8 @@ class PipelinesInstaller implements InstallerInterface
      */
     public function install()
     {
-        if (file_exists($this->destination . '/' . $this->filename)
+        if (
+            file_exists($this->destination . '/' . $this->filename)
             || !$this->isBitbucket()
         ) {
             return;
