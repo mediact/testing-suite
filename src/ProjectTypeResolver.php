@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright MediaCT. All rights reserved.
  * https://www.mediact.nl
@@ -16,12 +17,12 @@ class ProjectTypeResolver
     /**
      * The key from the composer configuration which contains other configuration.
      */
-    const COMPOSER_CONFIG_KEY = 'mediact-testing-suite';
+    public const COMPOSER_CONFIG_KEY = 'mediact-testing-suite';
 
     /**
      * The key in the configuration, which determines the overwrite for the type.
      */
-    const COMPOSER_CONFIG_TYPE_KEY = 'type';
+    public const COMPOSER_CONFIG_TYPE_KEY = 'type';
 
     /** @var Composer */
     private $composer;
