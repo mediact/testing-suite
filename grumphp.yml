@@ -2,6 +2,7 @@ imports:
   - resource: 'config/default/grumphp.yml'
 
 parameters:
+  composer.strict: false
   xmllint.ignore_patterns:
     - /^phpcs.xml$/
     - /^phpmd.xml$/
