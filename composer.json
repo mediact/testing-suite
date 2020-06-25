@@ -28,7 +28,7 @@
         "mediact/composer-dependency-installer": "^1.0",
         "mediact/composer-file-installer": "^1.0",
         "mediact/composer-unclog-plugin": "^1.0",
-        "phpro/grumphp": "@stable",
+        "phpro/grumphp": ">=0.19 <1.0",
         "phpstan/phpstan": "@stable",
         "phpunit/phpunit": "@stable",
         "sensiolabs/security-checker": "@stable"
