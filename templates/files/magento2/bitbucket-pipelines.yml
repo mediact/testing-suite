@@ -10,7 +10,7 @@ pipelines:
           - composer
           - vendor
         script:
-          - composer self-update
+          - composer self-update --1
           - if [ -f "composer.lock" ]; then composer check-platform-reqs; fi
           - if [ -n "$COMPOSER_PRE_INSTALL_CALLBACK" ]; then eval $COMPOSER_PRE_INSTALL_CALLBACK; fi
           - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
