@@ -42,6 +42,30 @@ class Plugin implements PluginInterface, EventSubscriberInterface
     }
 
     /**
+     * Remove any hooks from Composer.
+     *
+     * @param Composer    $composer
+     * @param IOInterface $io
+     *
+     * @return void
+     */
+    public function deactivate(Composer $composer, IOInterface $io)
+    {
+    }
+
+    /**
+     * Prepare the plugin to be uninstalled
+     *
+     * @param Composer    $composer
+     * @param IOInterface $io
+     *
+     * @return void
+     */
+    public function uninstall(Composer $composer, IOInterface $io)
+    {
+    }
+
+    /**
      * Add installers.
      *
      * @param InstallerInterface[] ...$installers
