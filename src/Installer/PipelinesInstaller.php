@@ -97,7 +97,7 @@ class PipelinesInstaller implements InstallerInterface
             getcwd(),
             ...$files
         );
-        
+
         foreach ($reader as $mapping) {
             $this->fileInstaller->installFile($mapping);
             $this->io->write(
