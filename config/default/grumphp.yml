@@ -87,10 +87,3 @@ grumphp:
 
     phpunit:
       config_file: '%phpunit.config_file%'
-
-    securitychecker:
-      lockfile: '%securitychecker.lockfile%'
-      format: '%securitychecker.format%'
-      end_point: '%securitychecker.end_point%'
-      timeout: '%securitychecker.timeout%'
-      run_always: '%securitychecker.run_always%'

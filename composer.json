@@ -30,8 +30,7 @@
         "mediact/composer-unclog-plugin": "^1.0",
         "phpro/grumphp": ">=0.19 <1.0",
         "phpstan/phpstan": "@stable",
-        "phpunit/phpunit": "@stable",
-        "sensiolabs/security-checker": "@stable"
+        "phpunit/phpunit": "@stable"
     },
     "require-dev": {
         "composer/composer": "@stable",
