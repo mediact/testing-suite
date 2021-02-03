@@ -1,4 +1,4 @@
-image: srcoder/development-php:php73-fpm
+image: srcoder/development-php:php74-fpm
 definitions:
   caches:
     vendor: vendor
