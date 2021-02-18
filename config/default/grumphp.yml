@@ -35,9 +35,6 @@ parameters:
   phpunit.config_file: ./phpunit.xml
 
   securitychecker.lockfile: ./composer.lock
-  securitychecker.format: ~
-  securitychecker.end_point: ~
-  securitychecker.timeout: ~
   securitychecker.run_always: true
 
 grumphp:
@@ -90,7 +87,4 @@ grumphp:
 
     securitychecker:
       lockfile: '%securitychecker.lockfile%'
-      format: '%securitychecker.format%'
-      end_point: '%securitychecker.end_point%'
-      timeout: '%securitychecker.timeout%'
       run_always: '%securitychecker.run_always%'
