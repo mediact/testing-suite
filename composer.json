@@ -22,6 +22,7 @@
     "require": {
         "php": "^7.1",
         "composer-plugin-api": "^1.1 || ^2.0",
+        "enlightn/security-checker": "^1.5",
         "kint-php/kint": "@stable",
         "mediact/coding-standard": "@stable",
         "mediact/coding-standard-phpstorm": "@stable",
@@ -30,7 +31,8 @@
         "mediact/composer-unclog-plugin": "^1.0",
         "phpro/grumphp": ">=0.19 <1.0",
         "phpstan/phpstan": "@stable",
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "@stable",
+        "ext-zip": "*"
     },
     "require-dev": {
         "composer/composer": "@stable",
