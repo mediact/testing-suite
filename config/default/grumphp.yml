@@ -22,6 +22,12 @@ parameters:
   phpcs.standard: ./phpcs.xml
   phpcs.triggered_by: [php]
 
+  phplint.exclude: [ ]
+  phplint.jobs: ~
+  phplint.short_open_tag: false
+  phplint.ignore_patterns: [ ]
+  phplint.triggered_by: [ 'php', 'phtml' ]
+
   phpmd.exclude: []
   phpmd.ruleset:
     - ./phpmd.xml
@@ -73,6 +79,13 @@ grumphp:
     phpcs:
       standard: '%phpcs.standard%'
       triggered_by: '%phpcs.triggered_by%'
+
+    phplint:
+      exclude: '%phplint.exclude%'
+      jobs: '%phplint.jobs%'
+      short_open_tag: '%phplint.short_open_tag%'
+      ignore_patterns: '%phplint.ignore_patterns%'
+      triggered_by: '%phplint.triggered_by%'
 
     phpmd:
       exclude: '%phpmd.exclude%'

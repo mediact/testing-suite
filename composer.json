@@ -30,7 +30,8 @@
         "mediact/composer-unclog-plugin": "^1.0",
         "phpro/grumphp": ">=0.19 <1.0",
         "phpstan/phpstan": "@stable",
-        "phpunit/phpunit": "@stable"
+        "phpunit/phpunit": "@stable",
+        "php-parallel-lint/php-parallel-lint": "^1.2"
     },
     "require-dev": {
         "composer/composer": "@stable",
