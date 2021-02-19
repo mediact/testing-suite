@@ -22,11 +22,11 @@ parameters:
   phpcs.standard: ./phpcs.xml
   phpcs.triggered_by: [php]
 
-  phplint.exclude: [ ]
+  phplint.exclude: ['vendor']
   phplint.jobs: ~
   phplint.short_open_tag: false
   phplint.ignore_patterns: [ ]
-  phplint.triggered_by: [ 'php', 'phtml' ]
+  phplint.triggered_by: ['php', 'phtml']
 
   phpmd.exclude: []
   phpmd.ruleset:
@@ -41,9 +41,6 @@ parameters:
   phpunit.config_file: ./phpunit.xml
 
   securitychecker.lockfile: ./composer.lock
-  securitychecker.format: ~
-  securitychecker.end_point: ~
-  securitychecker.timeout: ~
   securitychecker.run_always: true
 
 grumphp:
@@ -100,3 +97,7 @@ grumphp:
 
     phpunit:
       config_file: '%phpunit.config_file%'
+
+    securitychecker:
+      lockfile: '%securitychecker.lockfile%'
+      run_always: '%securitychecker.run_always%'

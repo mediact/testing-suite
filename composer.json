@@ -22,6 +22,7 @@
     "require": {
         "php": "^7.1",
         "composer-plugin-api": "^1.1 || ^2.0",
+        "enlightn/security-checker": "^1.5",
         "kint-php/kint": "@stable",
         "mediact/coding-standard": "@stable",
         "mediact/coding-standard-phpstorm": "@stable",
