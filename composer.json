@@ -38,6 +38,9 @@
         "composer/composer": "@stable",
         "mikey179/vfsstream": "@stable"
     },
+    "replace": {
+        "sensiolabs/security-checker": "*"
+    },
     "bin": [
         "bin/mediact-testing-suite"
     ],
