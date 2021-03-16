@@ -35,9 +35,6 @@ parameters:
   phpunit.config_file: ./phpunit.xml
 
   securitychecker.lockfile: ./composer.lock
-  securitychecker.format: ~
-  securitychecker.end_point: ~
-  securitychecker.timeout: ~
   securitychecker.run_always: true
 
   git_blacklist.keywords:
@@ -104,3 +101,7 @@ grumphp:
 
     phpunit:
       config_file: '%phpunit.config_file%'
+
+    securitychecker:
+      lockfile: '%securitychecker.lockfile%'
+      run_always: '%securitychecker.run_always%'
