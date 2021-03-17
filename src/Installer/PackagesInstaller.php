@@ -43,6 +43,12 @@ class PackagesInstaller implements InstallerInterface
                 'name' => 'mediact/coding-standard-magento2',
                 'version' => '@stable'
             ]
+        ],
+        'laravel' => [
+            [
+                'name' => 'elgentos/laravel-coding-standard',
+                'version' => '@stable'
+            ]
         ]
     ];
 
@@ -53,7 +59,7 @@ class PackagesInstaller implements InstallerInterface
      * @param ProjectTypeResolver      $typeResolver
      * @param IOInterface              $io
      * @param DependencyInstaller|null $installer
-     * @param array                    $mapping
+     * @param array|null               $mapping
      */
     public function __construct(
         Composer $composer,
