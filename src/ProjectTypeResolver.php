@@ -30,7 +30,9 @@ class ProjectTypeResolver
     /** @var array */
     private $mapping = [
         'magento2-module' => 'magento2',
-        'magento-module'  => 'magento1'
+        'magento-module'  => 'magento1',
+        'magento2-project' => 'magento2',
+        'magento-project' => 'magento2'
     ];
 
     /**
@@ -53,6 +55,8 @@ class ProjectTypeResolver
     public function resolve(): string
     {
         $config = $this->composer->getConfig();
+
+        // Fallback to the "old" solution
         if ($config->has(static::COMPOSER_CONFIG_KEY)) {
             $configNode = $config->get(static::COMPOSER_CONFIG_KEY);
             if (isset($configNode[static::COMPOSER_CONFIG_TYPE_KEY])) {
