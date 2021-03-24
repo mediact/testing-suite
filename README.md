@@ -39,6 +39,8 @@ Depending on the composer type of the project an other standard will be used:
 
 - `magento-module`: [MediaCT Coding Standard Magento1](https://github.com/mediact/coding-standard-magento1)
 - `magento2-module`: [MediaCT Coding Standard Magento2](https://github.com/mediact/coding-standard-magento2)
+- `magento-project`: [MediaCT Coding Standard Magento1](https://github.com/mediact/coding-standard-magento1)
+- `magento2-project`: [MediaCT Coding Standard Magento2](https://github.com/mediact/coding-standard-magento2)
 
 ### Overriding the type
 
