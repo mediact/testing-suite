@@ -104,7 +104,8 @@ class ProjectTypeResolverTest extends TestCase
         return [
             ['some-type', 'default'],
             ['magento-module', 'magento1'],
-            ['magento2-module', 'magento2']
+            ['magento2-module', 'magento2'],
+            ['alumio-project', 'alumio'],
         ];
     }
 }

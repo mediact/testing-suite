@@ -22,6 +22,12 @@ parameters:
   phpcs.standard: ./phpcs.xml
   phpcs.triggered_by: [php]
 
+  phplint.exclude: ['vendor']
+  phplint.jobs: ~
+  phplint.short_open_tag: false
+  phplint.ignore_patterns: [ ]
+  phplint.triggered_by: ['php', 'phtml']
+
   phpmd.exclude: []
   phpmd.ruleset:
     - ./phpmd.xml
@@ -35,9 +41,6 @@ parameters:
   phpunit.config_file: ./phpunit.xml
 
   securitychecker.lockfile: ./composer.lock
-  securitychecker.format: ~
-  securitychecker.end_point: ~
-  securitychecker.timeout: ~
   securitychecker.run_always: true
 
   git_blacklist.keywords:
@@ -91,6 +94,13 @@ grumphp:
       standard: '%phpcs.standard%'
       triggered_by: '%phpcs.triggered_by%'
 
+    phplint:
+      exclude: '%phplint.exclude%'
+      jobs: '%phplint.jobs%'
+      short_open_tag: '%phplint.short_open_tag%'
+      ignore_patterns: '%phplint.ignore_patterns%'
+      triggered_by: '%phplint.triggered_by%'
+
     phpmd:
       exclude: '%phpmd.exclude%'
       ruleset: '%phpmd.ruleset%'
@@ -104,3 +114,7 @@ grumphp:
 
     phpunit:
       config_file: '%phpunit.config_file%'
+
+    securitychecker:
+      lockfile: '%securitychecker.lockfile%'
+      run_always: '%securitychecker.run_always%'

@@ -30,7 +30,8 @@ class ProjectTypeResolver
     /** @var array */
     private $mapping = [
         'magento2-module' => 'magento2',
-        'magento-module'  => 'magento1'
+        'magento-module'  => 'magento1',
+        'alumio-project'  => 'alumio',
     ];
 
     /**
