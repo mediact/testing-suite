@@ -1,0 +1,107 @@
+image: eu.gcr.io/aequalis-io/php-image
+definitions:
+  caches:
+    vendor: vendor
+  steps:
+    - step: &testing-suite
+        name: Testing suite
+        caches:
+          - composer
+          - vendor
+        script:
+          - if [ -f "composer.lock" ]; then composer check-platform-reqs; fi
+          - if [ -n "$COMPOSER_PRE_INSTALL_CALLBACK" ]; then eval $COMPOSER_PRE_INSTALL_CALLBACK; fi
+          - composer install --dev --prefer-dist --no-scripts --no-progress --optimize-autoloader --no-interaction -vvv
+          - composer show
+          - composer exec -v grumphp run
+
+    - step: &deploy-acceptance
+        name: Deploy to `Acceptance`
+        deployment: staging
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - export DEPLOYER_REPOSITORY=$BITBUCKET_GIT_SSH_ORIGIN
+          - export DEPLOYER_LOAD_ENVIRONMENT="source /etc/bash.bashrc && source ~/.bashrc"
+          - dep deploy acceptance -vvv
+
+    - step: &rollback-acceptance
+        name: Rollback `Acceptance`
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - dep rollback acceptance -vvv
+
+    - step: &unlock-acceptance
+        name: Unlock `Acceptance`
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - dep deploy:unlock acceptance -vvv
+
+    - step: &deploy-production
+        name: Deploy to `Production`
+        deployment: production
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - export DEPLOYER_REPOSITORY=$BITBUCKET_GIT_SSH_ORIGIN
+          - export DEPLOYER_LOAD_ENVIRONMENT="source /etc/bash.bashrc && source ~/.bashrc"
+          - dep deploy production -vvv
+
+    - step: &rollback-production
+        name: Rollback `Production`
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - dep rollback production -vvv
+
+    - step: &unlock-production
+        name: Unlock `Production`
+        image: eu.gcr.io/aequalis-io/alumio-deployer:latest
+        script:
+          - dep deploy:unlock production -vvv
+
+    - step: &update-alumio
+        name: Update Alumio
+        image: eu.gcr.io/aequalis-io/magement-console
+        script:
+          - if [ -n "$COMPOSER_PRE_INSTALL_CALLBACK" ]; then eval $COMPOSER_PRE_INSTALL_CALLBACK; fi
+          - composer update
+          - git add .
+          - git commit -m "Run composer update" --allow-empty
+          - git push
+          - if [ "$TAG_RELEASE" == "1" ]; then git tag -am "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}" "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}"; fi
+          - if [ "$TAG_RELEASE" == "1" ]; then git push origin "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}"; fi
+
+pipelines:
+  default:
+    - step: *testing-suite
+
+  branches:
+    master:
+      - step: *deploy-acceptance
+
+  tags:
+    '*':
+      - step: *deploy-production
+
+  custom:
+    deploy-acceptance:
+      - step: *deploy-acceptance
+
+    unlock-acceptance:
+      - step: *unlock-acceptance
+
+    rollback-acceptance:
+      - step: *rollback-acceptance
+
+    deploy-production:
+      - step: *deploy-production
+
+    unlock-production:
+      - step: *unlock-production
+
+    rollback-production:
+      - step: *rollback-production
+
+    update-alumio:
+      - variables:
+          - name: TAG_PREFIX
+          - name: TAG_RELEASE
+      - step: *update-alumio
