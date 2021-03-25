@@ -32,7 +32,8 @@ class ProjectTypeResolver
         'magento2-module' => 'magento2',
         'magento-module'  => 'magento1',
         'magento2-project' => 'magento2',
-        'magento-project' => 'magento2'
+        'magento-project' => 'magento2',
+        'alumio-project'  => 'alumio',
     ];
 
     /**
