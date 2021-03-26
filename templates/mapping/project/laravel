@@ -1,0 +1,3 @@
+{laravel/,}phpcs.xml
+{laravel/,}phpmd.xml
+{laravel/,}phpstan.neon

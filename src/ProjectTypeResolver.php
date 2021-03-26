@@ -34,6 +34,7 @@ class ProjectTypeResolver
         'magento2-project' => 'magento2',
         'magento-project' => 'magento2',
         'alumio-project'  => 'alumio',
+        'laravel-project' => 'laravel',
     ];
 
     /**
