@@ -43,6 +43,16 @@ parameters:
   securitychecker.lockfile: ./composer.lock
   securitychecker.run_always: true
 
+  git_blacklist.keywords:
+    - "die("
+    - "var_dump("
+    - "exit;"
+    - "Magento\\\\Framework\\\\App\\\\ObjectManager"
+  git_blacklist.whitelist_patterns: []
+  git_blacklist.triggered_by: [ 'php' ]
+  git_blacklist.regexp_type: G
+  git_blacklist.match_word: false
+
 grumphp:
   extensions:
     - Mediact\TestingSuite\Composer\GrumPHP\ParameterFixExtension
@@ -52,7 +62,7 @@ grumphp:
     succeeded: ~
 
   parallel:
-    enabled: false
+    enabled: true
 
   # Default tasks for testing suite
   tasks:
@@ -61,6 +71,13 @@ grumphp:
 
     jsonlint:
       detect_key_conflicts: '%jsonlint.detect_key_conflicts%'
+
+    git_blacklist:
+      keywords: '%git_blacklist.keywords%'
+      whitelist_patterns: '%git_blacklist.whitelist_patterns%'
+      triggered_by: '%git_blacklist.triggered_by%'
+      regexp_type: '%git_blacklist.regexp_type%'
+      match_word: '%git_blacklist.match_word%'
 
     xmllint:
       load_from_net: '%xmllint.load_from_net%'
