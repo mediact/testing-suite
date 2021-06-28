@@ -23,6 +23,9 @@ definitions:
           - export DEPLOYER_REPOSITORY=$BITBUCKET_GIT_SSH_ORIGIN
           - export DEPLOYER_LOAD_ENVIRONMENT="source /etc/bash.bashrc && source ~/.bashrc"
           - dep deploy acceptance -vvv
+        after-script:
+          - COMMIT_MESSAGE=`git log --format=%B -n 1 $BITBUCKET_COMMIT`
+          - if [[ $BITBUCKET_EXIT_CODE -ne 0 ]]; then eval $ALUMIO_DEPLOYMENTS_ON_DEPLOYMENT_FAIL_COMMAND; fi          
 
     - step: &rollback-acceptance
         name: Rollback `Acceptance`
@@ -44,6 +47,9 @@ definitions:
           - export DEPLOYER_REPOSITORY=$BITBUCKET_GIT_SSH_ORIGIN
           - export DEPLOYER_LOAD_ENVIRONMENT="source /etc/bash.bashrc && source ~/.bashrc"
           - dep deploy production -vvv
+        after-script:
+          - COMMIT_MESSAGE=`git log --format=%B -n 1 $BITBUCKET_COMMIT`
+          - if [[ $BITBUCKET_EXIT_CODE -ne 0 ]]; then eval $ALUMIO_DEPLOYMENTS_ON_DEPLOYMENT_FAIL_COMMAND; fi
 
     - step: &rollback-production
         name: Rollback `Production`
@@ -68,6 +74,9 @@ definitions:
           - git push
           - if [ "$TAG_RELEASE" == "1" ]; then git tag -am "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}" "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}"; fi
           - if [ "$TAG_RELEASE" == "1" ]; then git push origin "${TAG_PREFIX}.${BITBUCKET_BUILD_NUMBER}"; fi
+        after-script:
+          - COMMIT_MESSAGE=`git log --format=%B -n 1 $BITBUCKET_COMMIT`
+          - if [[ $BITBUCKET_EXIT_CODE -ne 0 ]]; then eval $ALUMIO_DEPLOYMENTS_ON_UPDATE_FAIL_COMMAND; fi          
 
 pipelines:
   default:
