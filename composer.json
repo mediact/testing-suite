@@ -22,6 +22,7 @@
     "require": {
         "php": "^7.1",
         "composer-plugin-api": "^1.1",
+        "enlightn/security-checker": "^1.5",
         "kint-php/kint": "~1.0 || ~2.0 || ~3.0",
         "mediact/coding-standard": "~1.0 || ~2.0",
         "mediact/coding-standard-phpstorm": "~1.0 || ~2.0",
@@ -31,9 +32,9 @@
         "phpro/grumphp": ">=0.19 <1.0",
         "phpstan/phpstan": "~0.1",
         "phpunit/phpunit": "~3.7 || ~4.0 || ~5.0 || ~6.0 || ~7.0 || ~8.0",
-        "sensiolabs/security-checker": "^5.0",
         "symfony/event-dispatcher": "^4.0",
-        "symfony/dependency-injection": "^4.0"
+        "symfony/dependency-injection": "^4.0",
+        "ext-zip": "*"
     },
     "require-dev": {
         "composer/composer": "@stable",
