@@ -7,4 +7,6 @@
     <description>PHPCS</description>
     <!--<exclude-pattern>path/to/exclude/*</exclude-pattern>-->
     <rule ref="./vendor/elgentos/laravel-coding-standard/src/ElgentosLaravel"/>
+    <!-- Append arg -s to phpcs to display the name of failed sniffs -->
+    <arg value="s"/>
 </ruleset>
