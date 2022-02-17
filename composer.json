@@ -70,5 +70,10 @@
             "/phpmd.xml",
             "/phpunit.xml"
         ]
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "npm install --save-dev --save-exact prettier"
+        ]
     }
 }
