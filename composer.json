@@ -73,7 +73,10 @@
     },
     "scripts": {
         "post-install-cmd": [
-            "npm install --save-dev --save-exact prettier"
+            "npm install --save-dev husky lint-staged",
+            "npx husky install",
+            "npm set-script prepare \"husky install\"",
+            "npx husky add .husky/pre-commit \"npx lint-staged\""
         ]
     }
 }
