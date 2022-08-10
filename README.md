@@ -1,6 +1,8 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mediact/testing-suite/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mediact/testing-suite/?branch=master)
 
-# MediaCT Testing Suite
+# [ABANDONED] MediaCT Testing Suite
+This package has been abandoned and will not get any support. We replaced it with the
+[youwe testing suite](https://github.com/YouweGit/testing-suite). 
 
 This package serves as an umbrella package for several of MediaCT's testing 
 packages.

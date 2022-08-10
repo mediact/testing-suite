@@ -5,6 +5,7 @@
     "license": "MIT",
     "prefer-stable": true,
     "minimum-stability": "stable",
+    "abandoned": "youwe/testing-suite",
     "authors": [
         {
             "name": "MediaCT B.V.",
@@ -45,6 +46,14 @@
         "bin/mediact-testing-suite"
     ],
     "extra": {
+        "scripts": {
+            "post-install-cmd": [
+                "npm install --save-dev husky lint-staged",
+                "npx husky install",
+                "npm set-script prepare \"husky install\"",
+                "npx husky add .husky/pre-commit \"npx lint-staged\""
+            ]
+        },
         "grumphp": {
             "config-default-path": "grumphp.yml"
         },
@@ -70,5 +79,12 @@
             "/phpmd.xml",
             "/phpunit.xml"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "mediact/coding-standard-phpstorm": true,
+            "mediact/composer-unclog-plugin": true,
+            "phpro/grumphp": true
+        }
     }
 }
